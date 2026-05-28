@@ -1,0 +1,1056 @@
+html {
+    background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+a {
+    text-decoration: none; /* Bỏ gạch chân của link */
+}
+.blur-background {
+    filter: blur(5px); /* Làm mờ nền */
+}
+
+/* Start: Container-main */
+/* .container-main {
+    /* height: 100vh;
+    display: grid;
+    grid-template-rows: 85px 1fr;
+    grid-template-areas:
+        "header "
+        "container";
+} */
+/* End: Container-main */
+
+/* Start: Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85px;
+    background: linear-gradient(to right, #1a1a1a, #202020, #393939);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: white;
+    border-bottom: 1px solid #fff;
+}
+
+@keyframes flickerGlow {
+    0% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0px 0px 20px rgb(168, 0, 0));
+    }
+
+    100% {
+        filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+    }
+}
+
+.header .logo img {
+    height: 100px;
+    animation: flickerGlow 1s infinite alternate;
+}
+
+.header .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    border-radius: 20px;
+    padding: 8px 30px;
+}
+
+.header .search-bar input {
+    border: #a8a3a3;
+    outline: none;
+    background: none;
+    color: white;
+    padding: 5px;
+    width: 300px;
+}
+
+.header .search-bar input::placeholder {
+    color: #aaa;
+}
+
+.header .search-bar i {
+    color: white;
+    cursor: pointer;
+}
+
+.header .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.header .nav-links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.header .nav-links a:hover {
+    color: #560000;
+    text-shadow: 0px 0px 3px #ffffff, 0px 0px 5px #ffffff; /* Tạo viền xanh */
+}
+/* End: Header */
+
+/* Start: Banner */
+.banner {
+background-color: #fff;
+display: flex;
+justify-content: center;
+width: 100%;
+overflow: hidden; 
+}
+
+.banner-main {
+width: 100%;
+margin-top: 85px;
+position: relative;
+}
+
+.banner-main-img {
+position: relative;
+width: 100%;  
+height: auto;
+object-fit: cover;  
+}
+
+.banner-main-btn {
+background-color: #EEE;
+height: 150px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 50px;
+}
+
+/* Các phần tử bên trong banner */
+@keyframes identifier {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    }
+
+.banner-main .banner-main-btn .item {
+display: flex;
+flex-direction: row;
+align-items: center;
+cursor: pointer;
+}
+
+.banner-main .banner-main-btn .item:hover {
+animation: identifier 0.5s ease-in-out;
+}
+
+.banner-main .banner-main-btn .icon {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+}
+
+.banner-main .banner-main-btn .icon>img {
+width: 50px;
+height: auto;
+}
+
+.banner-main .banner-main-btn .text {
+font-size: 16px;
+padding-left: 10px;
+font-weight: bold;
+color: #222;
+}
+/* End: Banner */
+
+
+/* Start: Container */
+.container {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 0;
+}
+.container .image-box {
+    position: relative;
+    padding: 10px;
+}
+.container .image-box img {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+}
+.container .image-box .dem {
+    z-index: -1;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 93%;
+    padding-top: 78%;
+    max-width: 500px;
+    display: block;
+    background-color: red;
+}
+.container .content {
+    padding-left: 50px;
+}
+.container .content h1 {
+    font-size: 36px;
+    font-weight: bold;
+}
+.container .content p {
+    margin-top: 40px;
+    color: #bdc3c7;
+}
+.container .links {
+    margin-top: 40px;
+    display: flex;
+}
+.container .links a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #e74c3c;
+    margin-right: 15px;
+}
+.container .info {
+    flex-wrap: wrap;
+    max-width: 500px;
+}
+.container .info .info-group-one, .info-group-two {
+    display: flex;
+    margin-top: 42px;
+}
+.container .info .info-group-one>div, .info-group-two>div {
+    /* margin-right: 30px; */
+    text-align: center;
+}
+.container .info div span {
+    display: block;
+    margin-bottom: 32px;
+}
+.container .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+/* End: container */
+
+/* Start: description */
+.description {
+    color: #bdc3c7;
+}
+.description>p {
+    text-align: justify;
+    line-height: 1.6;
+    display: block;
+    padding: 0 170px 70px 170px;
+}
+/* End: description */
+
+/* Start: img-library */
+.img-library {
+    padding: 40px 0;
+    background-color: #fff;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.gallery-container {
+    position: relative;
+    max-width: 1120px;
+    margin: auto;
+}
+.main-image {
+    width: 100%;
+    border-radius: 10px;
+    /* transition: opacity 0.5s ease-in-out;
+    opacity: 1; */
+    position: relative;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.slide-left {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+.slide-right {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.thumbnails img {
+    width: 100px;
+    height: 60px;
+    margin: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+.thumbnails img.active {
+    opacity: 1;
+    border: 2px solid white;
+}
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+}
+.arrow-left { left: 10px; }
+.arrow-right { right: 10px; }
+/* End: img-library */
+
+/* Start: footer */
+.footer {
+    padding: 50px 20px;
+    text-align: center;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+}
+
+.footer .socials-list {
+    font-size: 24px;
+}
+
+.footer .socials-list a {
+    color: #fff;
+    text-decoration-line: none;
+}
+
+.footer .socials-list a:hover {
+    color: #3498db;
+}
+
+@keyframes flickerText {
+    0% {
+        color: #fff;
+        text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        color: #c21414;
+        text-shadow: 0px 0px 15px rgba(255, 0, 0, 1);
+    }
+
+    100% {
+        color: #fff;
+        text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.footer .copyright {
+    font-size: 15px;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.footer .copyright a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+/* End: footer */
+
+/* ═══════════════════════════════════════════════════
+   BOOKING PANEL — Premium Automotive Luxury
+   ═══════════════════════════════════════════════════ */
+
+/* Overlay */
+.form-dangkylaithu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Panel Container */
+.booking-panel {
+    display: flex;
+    max-width: 960px;
+    width: 94%;
+    max-height: 92vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    animation: panelSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes panelSlideIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ─── Left: Form Side ─── */
+.booking-panel__form {
+    flex: 1;
+    background: linear-gradient(160deg, #111111 0%, #0d0d0d 50%, #0a0a0a 100%);
+    padding: 36px 36px 28px;
+    position: relative;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+}
+.booking-panel__form::-webkit-scrollbar { width: 5px; }
+.booking-panel__form::-webkit-scrollbar-track { background: transparent; }
+.booking-panel__form::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+/* Close Button */
+.booking-panel__close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    z-index: 2;
+}
+.booking-panel__close:hover {
+    background: rgba(235, 10, 30, 0.12);
+    color: #EB0A1E;
+    border-color: rgba(235, 10, 30, 0.3);
+    transform: rotate(90deg);
+}
+
+/* ─── Header ─── */
+.booking-panel__header {
+    margin-bottom: 22px;
+}
+.booking-panel__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1.5px;
+    line-height: 1.25;
+    margin: 0;
+}
+.booking-panel__accent {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #EB0A1E, #ff3347);
+    border-radius: 2px;
+    margin: 12px 0;
+}
+.booking-panel__subtitle {
+    font-size: 13px;
+    color: #777;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 0.2px;
+}
+
+/* ─── Car Info Card ─── */
+.booking-panel__car-card {
+    background: linear-gradient(135deg, #161616 0%, #1a1a1a 100%);
+    border: 1px solid #252525;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+}
+.booking-panel__car-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, #EB0A1E, #ff4d5e, transparent);
+    border-radius: 0 2px 2px 0;
+}
+.booking-panel__car-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0 6px 12px;
+}
+.booking-panel__car-label {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.booking-panel__car-label i {
+    color: #555;
+    font-size: 12px;
+    width: 14px;
+    text-align: center;
+}
+.booking-panel__car-value {
+    font-size: 14px;
+    color: #ddd;
+    font-weight: 600;
+}
+.booking-panel__car-divider {
+    border-top: 1px solid #2a2a2a;
+    margin: 8px 12px;
+}
+.booking-panel__car-row--deposit {
+    margin-top: 2px;
+}
+.booking-panel__deposit-amount {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: #EB0A1E !important;
+    text-shadow: 0 0 20px rgba(235, 10, 30, 0.2);
+}
+
+/* ─── Form Fields ─── */
+.booking-panel__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+.booking-field {
+    flex: 1;
+}
+.booking-field__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+}
+.booking-field__input {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    color: #eee;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+.booking-field__input::placeholder {
+    color: #555;
+}
+.booking-field__input:focus {
+    border-color: rgba(235, 10, 30, 0.5);
+    background: rgba(235, 10, 30, 0.03);
+    box-shadow: 0 0 0 3px rgba(235, 10, 30, 0.08);
+}
+.booking-field__input:read-only {
+    background: rgba(255, 255, 255, 0.02);
+    color: #aaa;
+}
+.booking-field__input option {
+    background: #1a1a1a;
+    color: #ddd;
+}
+
+/* Date picker icon visibility on dark bg */
+.booking-field__input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.booking-field__input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+/* Number input spinner */
+.booking-field__input[type="number"]::-webkit-inner-spin-button,
+.booking-field__input[type="number"]::-webkit-outer-spin-button {
+    filter: invert(1);
+    opacity: 0.7;
+}
+
+/* Email wrap (input + toggle btn) */
+.booking-field__email-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+.booking-field__email-wrap .booking-field__input {
+    flex: 1;
+}
+.booking-field__email-toggle {
+    background: linear-gradient(135deg, #EB0A1E, #c40818);
+    color: #fff;
+    border: none;
+    padding: 0 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+.booking-field__email-toggle:hover {
+    background: linear-gradient(135deg, #ff1a2e, #d80a20);
+    box-shadow: 0 4px 12px rgba(235, 10, 30, 0.25);
+}
+
+/* 2-column row */
+.booking-field__row {
+    display: flex;
+    gap: 12px;
+}
+
+/* ─── Terms ─── */
+.booking-panel__terms {
+    margin-bottom: 16px;
+    padding: 0 2px;
+}
+.booking-panel__terms-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+}
+.booking-panel__checkbox {
+    width: 16px; height: 16px;
+    accent-color: #EB0A1E;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.booking-panel__terms-link {
+    color: #EB0A1E;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+}
+.booking-panel__terms-link:hover {
+    color: #ff3347;
+}
+
+/* ─── Submit Button ─── */
+.booking-panel__submit {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #EB0A1E, #b80816);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+    pointer-events: none;
+    position: relative;
+    overflow: hidden;
+}
+.booking-panel__submit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+.booking-panel__submit.enabled {
+    opacity: 1;
+    pointer-events: auto;
+}
+.booking-panel__submit.enabled:hover {
+    background: linear-gradient(135deg, #ff1a2e, #cc0c1a);
+    box-shadow: 0 8px 32px rgba(235, 10, 30, 0.35);
+    transform: translateY(-1px);
+}
+.booking-panel__submit.enabled:hover::before {
+    left: 100%;
+}
+.booking-panel__submit.enabled:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 16px rgba(235, 10, 30, 0.25);
+}
+.booking-panel__submit i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+.booking-panel__submit.enabled:hover i {
+    transform: translateX(4px);
+}
+
+/* ─── Right: Image ─── */
+.booking-panel__image {
+    width: 360px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+.booking-panel__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.booking-panel__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(17,17,17,0.5), transparent 30%);
+    pointer-events: none;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+    .booking-panel {
+        flex-direction: column;
+        max-height: 95vh;
+        width: 96%;
+    }
+    .booking-panel__image {
+        display: none;
+    }
+    .booking-panel__form {
+        padding: 28px 22px 22px;
+    }
+    .booking-panel__title {
+        font-size: 18px;
+    }
+    .booking-field__row {
+        flex-direction: column;
+        gap: 14px;
+    }
+}
+
+/* ═══════ TERMS MODAL ═══════ */
+.terms-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.terms-modal__content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 560px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #ddd;
+    position: relative;
+}
+.terms-modal__content h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.terms-modal__content h3 {
+    color: #EB0A1E;
+    font-size: 15px;
+    margin: 16px 0 6px;
+}
+.terms-modal__content p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #bbb;
+}
+.terms-modal__close {
+    position: absolute;
+    top: 12px; right: 16px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 20px;
+    cursor: pointer;
+}
+.terms-modal__close:hover { color: #fff; }
+.terms-modal__agree {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #EB0A1E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.terms-modal__agree:hover { background: #c70818; }
+
+/* ═══════ PAYMENT MODAL — Dark Toyota Theme ═══════ */
+.payment-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+.payment-modal__content {
+    background: #111111;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 92%;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+/* Header đỏ brand */
+.payment-modal__header {
+    background: linear-gradient(135deg, #C8102E, #9b0d24);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+}
+.payment-modal__header-icon { font-size: 32px; }
+.payment-modal__header h2 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+.payment-modal__header p {
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    margin: 3px 0 0;
+}
+.payment-modal__close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.payment-modal__close:hover { background: rgba(255,255,255,0.3); }
+
+/* Body */
+.payment-modal__body { padding: 20px 24px; }
+
+/* Order info block */
+.payment-modal__order-info {
+    background: #181818;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+.payment-modal__info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 13px;
+    color: #999;
+}
+.payment-modal__info-row strong {
+    color: #ddd;
+    font-size: 13px;
+}
+.payment-modal__mono {
+    font-family: 'Courier New', monospace;
+    font-size: 11px !important;
+    color: #888 !important;
+}
+.payment-modal__info-row--deposit {
+    border-top: 1px solid #2a2a2a;
+    padding-top: 10px;
+    margin-top: 4px;
+}
+.payment-modal__info-row--deposit strong {
+    color: #C8102E !important;
+    font-size: 16px !important;
+    font-weight: 800;
+}
+.payment-modal__info-row--deadline strong {
+    color: #F59E0B !important;
+    font-weight: 700;
+}
+
+/* Bank block */
+.payment-modal__bank {
+    background: #181818;
+    border: 1px solid #C8102E33;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+.payment-modal__bank-header {
+    background: linear-gradient(135deg, #C8102E22, #C8102E11);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #C8102E;
+    border-bottom: 1px solid #C8102E22;
+}
+.payment-modal__bank-rows { padding: 10px 16px; }
+.payment-modal__bank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    font-size: 13px;
+}
+.payment-modal__bank-label { color: #777; }
+.payment-modal__bank-value {
+    color: #ddd;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.payment-modal__bank-row--note {
+    border-top: 1px solid #2a2a2a;
+    padding-top: 10px;
+    margin-top: 4px;
+}
+.payment-modal__bank-row--note strong {
+    color: #C8102E;
+    font-family: 'Courier New', monospace;
+}
+
+/* Nút sao chép inline */
+.btn-copy {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #aaa;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+}
+.btn-copy:hover {
+    background: rgba(200,16,46,0.15);
+    border-color: #C8102E66;
+    color: #C8102E;
+}
+
+/* Notice */
+.payment-modal__notice {
+    background: #1a1a0a;
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #F59E0B;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* Actions */
+.payment-modal__actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.payment-modal__btn-primary {
+    background: linear-gradient(135deg, #C8102E, #a00d23);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+.payment-modal__btn-primary:hover {
+    background: linear-gradient(135deg, #d9142f, #b8102a);
+    box-shadow: 0 4px 16px rgba(200,16,46,0.3);
+}
+.payment-modal__btn-ghost {
+    background: transparent;
+    color: #888;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.payment-modal__btn-ghost:hover {
+    border-color: #555;
+    color: #ccc;
+    background: rgba(255,255,255,0.04);
+}

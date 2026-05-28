@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylecss/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" >
+    <link rel="stylesheet" href="./themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="./stylecss/detailCar.css">
+    <title>N18-AUTO</title>
+    <link rel="icon" href="./image/LogoWeb.png">
+</head>
+<body>
+    <div class="container-main">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./image/LogoWeb.png" alt="Car Rental Logo">
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="trackOrder.html"><i class="fa fa-search"></i>
+                    <p>Tra cứu đơn</p>
+                </a>
+                <a href="aboutus.html"><i class="fa fa-question-circle"></i>
+                    <p>About US</p>
+                </a>
+                <a id="detail-login-btn" href="login.html"><i class="fa fa-user"></i>
+                    <p id="detail-login-text">Login</p>
+                </a>
+            </nav>  
+        </div>
+        <div class="banner">
+        <div class="banner-main">
+            <img class="banner-main-img" id="carBanner" src="" alt="Car Banner">
+            <div class="banner-main-btn">
+                <a id="openFormDatLich">
+                    <div class="item">
+                        <div class="icon">
+                            <img src="./image/img_banner/du-toan-chi-phi-icon.png" alt="Đặt lịch">
+                        </div>
+                        <div class="text">Đặt lịch & Đặt cọc</div>
+                    </div>
+                </a>
+                <a href="./document/Vios.pdf" target="_blank" rel="noopener noreferrer">
+                    <div class="item">
+                        <div class="icon1">
+                            <img src="./image/img_banner/taicatalogue.png" width="35" alt="Catalogue">
+                        </div>
+                        <div class="text">Tải Catalogue</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+        <div class="container">
+            <div class="image-box">
+                <img id="carMainImage" src="" alt="Car Image">
+                <div class="dem"></div>
+            </div>
+            <div class="content">
+                <h1 id="carName">Tên xe</h1>
+                <p>Bứt phá an toàn Mở ngàn trải nghiệm</p>
+                <div class="links" >
+                    <div style="border-right: 1px solid #fff;">
+                        <a href="#" >XEM THÔNG SỐ</a>
+                    </div>
+                    <div style="margin-left: 15px">
+                        <a href="#" >SO SÁNH XE</a>
+                    </div>                
+                </div>
+                <div class="info">
+                    <div class="info-group-one">
+                        <div style="padding: 0 36px 0 0; border-right: 1px solid #fff;">
+                            <span>Số chỗ ngồi</span>
+                            <p id="carSeats" style="font-size: 25px;"></p>
+                        </div>
+                        <div style="padding: 0 36px 0 76px; border-right: 1px solid #fff;">
+                            <span>Kiểu dáng</span>
+                            <p id="carType" style="font-size: 25px;"></p>
+                        </div>
+                        <div style="padding: 0 0 0 76px;">
+                            <span>Nhiên liệu</span>
+                            <p id="carFuel" style="font-size: 25px;"></p></div>
+                        </div>
+                    <div class="info-group-two">
+                        <div style="padding: 0 56px 0 36px; border-right: 1px solid #fff;">
+                            <span>Tồn kho</span>
+                            <p id="carStock" style="font-size: 25px; color: #4ade80;">20 xe</p>
+                        </div>
+                        <div style="padding: 0 0 0 100px;">
+                            <span>Giá từ</span>
+                            <p id="carPrice" style="font-size: 25px;"></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <p id = 'description'>
+            </p>
+        </div>
+        <div class="img-library">
+            <h1 style="margin-bottom: 40px; color: #000; font-size: 36px;">THƯ VIỆN ẢNH</h1>
+            <div class="gallery-container">
+                <button class="arrow arrow-left" onclick="changeImage(-1)">&#10094;</button>
+                <img id="mainImage" class="main-image" src="./image/img_library/img_library_vios/anh1.png" alt="">
+                <button class="arrow arrow-right" onclick="changeImage(1)">&#10095;</button>
+            </div>
+            <div class="thumbnails">
+                <img class="thumbnail active" src="./image/img_library/img_library_vios/anh1.png" onclick="selectImage(0)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh2.png" onclick="selectImage(1)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh3.png" onclick="selectImage(2)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh4.png" onclick="selectImage(3)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh5.png" onclick="selectImage(4)">
+                <img class="thumbnail" src="./image/img_library/img_library_vios/anh6.png" onclick="selectImage(5)">
+            </div>
+        </div>
+        <div class="footer">
+            <div class="socials-list">
+                <a href="https://www.facebook.com/minhvuog.dev/" target="_blank" rel="noopener noreferrer" ><i class="ti-facebook"></i></a>
+                <a href="https://www.instagram.com/_minhvuog.dzai/" target="_blank" rel="noopener noreferrer"><i class="ti-instagram"></i></a>
+                <a href="https://www.youtube.com/@MinhV%C6%B0%C6%A1ngD%C6%B0%C6%A1ng-v8e"  target="_blank" rel="noopener noreferrer"><i class="ti-youtube"></i></a>
+                <a href="https://github.com/minhvuogdzz" target="_blank" rel="noopener noreferrer" ><i class="ti-github"></i></a>
+            </div>
+            <p class="copyright">Developed by <a href="">Founder Minh Vuong Duong & Co-Founder Hai Luu Cong</a></p>
+        </div>
+    </div>
+
+    <!-- ═══════ FORM ĐẶT LỊCH & ĐẶT CỌC — PREMIUM ═══════ -->
+    <div class="form-dangkylaithu">
+        <div class="booking-panel">
+            <!-- Left: Form -->
+            <div class="booking-panel__form">
+                <button class="booking-panel__close" id="closeForm"><i class="fa fa-times"></i></button>
+
+                <div class="booking-panel__header">
+                    <h1 class="booking-panel__title">ĐẶT LỊCH XEM XE<br>&amp; ĐẶT CỌC</h1>
+                    <div class="booking-panel__accent"></div>
+                    <p class="booking-panel__subtitle">Hoàn tất thông tin để đặt cọc giữ xe</p>
+                </div>
+
+                <div class="booking-panel__car-card" id="depositInfo">
+                    <div class="booking-panel__car-row">
+                        <span class="booking-panel__car-label"><i class="fa fa-car"></i> Xe</span>
+                        <strong class="booking-panel__car-value" id="depositCarName">—</strong>
+                    </div>
+                    <div class="booking-panel__car-row">
+                        <span class="booking-panel__car-label"><i class="fa fa-tag"></i> Giá niêm yết</span>
+                        <strong class="booking-panel__car-value" id="depositCarPrice">—</strong>
+                    </div>
+                    <div class="booking-panel__car-divider"></div>
+                    <div class="booking-panel__car-row booking-panel__car-row--deposit">
+                        <span class="booking-panel__car-label"><i class="fa fa-wallet"></i> Tiền cọc (10%)</span>
+                        <strong class="booking-panel__deposit-amount" id="depositAmount">—</strong>
+                    </div>
+                </div>
+
+                <div class="booking-panel__fields">
+                    <div class="booking-field">
+                        <label class="booking-field__label" for="fullname">Họ và tên *</label>
+                        <input class="booking-field__input" type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="booking-field">
+                        <label class="booking-field__label" for="email">Email *</label>
+                        <div class="booking-field__email-wrap">
+                            <input class="booking-field__input" type="email" id="email" name="email" placeholder="email@gmail.com" readonly>
+                            <button type="button" class="booking-field__email-toggle" id="changeEmailBtn" onclick="toggleEmailEdit()">Thay đổi</button>
+                        </div>
+                    </div>
+                    <div class="booking-field__row">
+                        <div class="booking-field">
+                            <label class="booking-field__label" for="quantity">Số lượng xe *</label>
+                            <input class="booking-field__input" type="number" id="quantity" name="quantity" value="1" min="1" max="5" oninput="updateDepositByQuantity()">
+                        </div>
+                        <div class="booking-field">
+                            <label class="booking-field__label" for="date">Ngày hẹn xem xe *</label>
+                            <input class="booking-field__input" type="date" id="date" name="date">
+                        </div>
+                    </div>
+                    <div class="booking-field__row">
+                        <div class="booking-field">
+                            <label class="booking-field__label" for="phone">Số điện thoại *</label>
+                            <input class="booking-field__input" type="text" id="phone" name="phone" placeholder="0369017983">
+                        </div>
+                        <div class="booking-field">
+                            <label class="booking-field__label" for="city">Tỉnh/Thành phố *</label>
+                            <select class="booking-field__input" id="city" name="city">
+                                <option value="">Chọn tỉnh/thành phố</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="booking-field">
+                        <label class="booking-field__label" for="dealer">Đại lý *</label>
+                        <select class="booking-field__input" id="dealer" name="dealer">
+                            <option value="">Chọn đại lý</option>
+                            <option value="CS1">N18-AUTO (CS1)</option>
+                            <option value="CS2">N18-AUTO (CS2)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="booking-panel__terms">
+                    <label class="booking-panel__terms-label">
+                        <input type="checkbox" class="booking-panel__checkbox" name="terms" id="termsCheckbox">
+                        <span>Tôi đã đọc và đồng ý với <a href="#" onclick="showTermsModal(); return false;" class="booking-panel__terms-link">điều khoản giao dịch</a></span>
+                    </label>
+                </div>
+
+                <button class="booking-panel__submit" id="submitButton">
+                    <span>XÁC NHẬN ĐẶT CỌC</span>
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Right: Image -->
+            <div class="booking-panel__image">
+                <img src="./document/datlich.jpg" alt="Đặt cọc xe">
+                <div class="booking-panel__image-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════ MODAL ĐIỀU KHOẢN ═══════ -->
+    <div class="terms-modal" id="termsModal" style="display:none;">
+        <div class="terms-modal__content">
+            <button class="terms-modal__close" onclick="document.getElementById('termsModal').style.display='none'">✕</button>
+            <h2>📋 ĐIỀU KHOẢN GIAO DỊCH</h2>
+            <div class="terms-modal__body">
+                <h3>1. Đặt cọc</h3>
+                <p>- Tiền cọc = 10% giá xe, thanh toán qua chuyển khoản ngân hàng.</p>
+                <p>- Sau khi đặt cọc, bạn có 1 ngày kể từ ngày hẹn xem xe để hoàn tất giao dịch.</p>
+                
+                <h3>2. Hủy đơn</h3>
+                <p>- Nếu quá deadline (ngày hẹn + 1 ngày) mà chưa xác nhận → đơn tự động hủy.</p>
+                <p>- Tiền cọc sẽ được hoàn lại trong vòng 3-5 ngày làm việc khi đơn bị hủy.</p>
+                
+                <h3>3. Thanh toán</h3>
+                <p>- Chuyển khoản vào tài khoản N18-AUTO.</p>
+                <p>- Nội dung CK: <strong>[MÃ ĐƠN] - [HỌ TÊN]</strong></p>
+                <p>- Admin sẽ xác nhận cọc trong vòng 24h.</p>
+                
+                <h3>4. Giao xe</h3>
+                <p>- Sau khi admin xác nhận "Đã cọc", bạn đến showroom theo lịch hẹn.</p>
+                <p>- Thanh toán phần còn lại tại showroom để nhận xe.</p>
+            </div>
+            <button class="terms-modal__agree" onclick="document.getElementById('termsCheckbox').checked=true; document.getElementById('termsModal').style.display='none'; validateForm();">
+                Tôi đồng ý
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════ MODAL CHỜ THANH TOÁN ═══════ -->
+    <div class="payment-modal" id="orderSuccessModal" style="display:none;">
+        <div class="payment-modal__content">
+            <!-- Header đỏ brand -->
+            <div class="payment-modal__header">
+                <span class="payment-modal__header-icon">🏦</span>
+                <div>
+                    <h2>ĐƠN HÀNG ĐÃ TẠO</h2>
+                    <p>Vui lòng chuyển khoản để hoàn tất đặt cọc</p>
+                </div>
+                <button class="payment-modal__close" onclick="document.getElementById('orderSuccessModal').style.display='none';">✕</button>
+            </div>
+
+            <div class="payment-modal__body">
+                <!-- Thông tin đơn -->
+                <div class="payment-modal__order-info">
+                    <div class="payment-modal__info-row">
+                        <span>Mã đơn hàng</span>
+                        <strong id="successOrderId" class="payment-modal__mono">—</strong>
+                    </div>
+                    <div class="payment-modal__info-row">
+                        <span>Xe</span>
+                        <strong id="successCarName">—</strong>
+                    </div>
+                    <div class="payment-modal__info-row payment-modal__info-row--deposit">
+                        <span>Tiền cọc (10%)</span>
+                        <strong id="successDeposit">—</strong>
+                    </div>
+                    <div class="payment-modal__info-row payment-modal__info-row--deadline">
+                        <span>⏰ Deadline thanh toán</span>
+                        <strong id="successDeadline">—</strong>
+                    </div>
+                </div>
+
+                <!-- Block chuyển khoản -->
+                <div class="payment-modal__bank">
+                    <div class="payment-modal__bank-header">
+                        <span>💳</span>
+                        <strong>THÔNG TIN CHUYỂN KHOẢN</strong>
+                    </div>
+                    <div class="payment-modal__bank-rows">
+                        <div class="payment-modal__bank-row">
+                            <span class="payment-modal__bank-label">Ngân hàng</span>
+                            <span class="payment-modal__bank-value">Vietcombank</span>
+                        </div>
+                        <div class="payment-modal__bank-row">
+                            <span class="payment-modal__bank-label">Số tài khoản</span>
+                            <span class="payment-modal__bank-value">
+                                <strong id="bankAccount">1234567890123</strong>
+                                <button class="btn-copy" onclick="copyText('bankAccount')" title="Sao chép">📋</button>
+                            </span>
+                        </div>
+                        <div class="payment-modal__bank-row">
+                            <span class="payment-modal__bank-label">Chủ tài khoản</span>
+                            <span class="payment-modal__bank-value">CONG TY N18-AUTO</span>
+                        </div>
+                        <div class="payment-modal__bank-row payment-modal__bank-row--note">
+                            <span class="payment-modal__bank-label">Nội dung CK</span>
+                            <span class="payment-modal__bank-value">
+                                <strong id="successTransferNote">—</strong>
+                                <button class="btn-copy" onclick="copyText('successTransferNote')" title="Sao chép">📋</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lưu ý -->
+                <div class="payment-modal__notice">
+                    ⚠️ Đơn hàng sẽ tự động hủy nếu không thanh toán trước deadline. Admin xác nhận cọc trong 24h sau khi nhận CK.
+                </div>
+
+                <!-- Actions -->
+                <div class="payment-modal__actions">
+                    <a href="trackOrder.html" class="payment-modal__btn-primary">
+                        📋 Tra cứu đơn hàng
+                    </a>
+                    <button onclick="document.getElementById('orderSuccessModal').style.display='none';" class="payment-modal__btn-ghost">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./javascript/detailCar.js"></script>
+</body>
+</html>

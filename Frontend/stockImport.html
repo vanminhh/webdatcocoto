@@ -1,0 +1,63 @@
+<!-- ═══════════════════════════════════════════════════════
+     NHẬP HÀNG (IMPORT STOCK) — N18-AUTO Admin
+     ═══════════════════════════════════════════════════════ -->
+<div class="om">
+    <div class="om-header">
+        <h2 class="om-header__title">Nhập <span>Hàng</span></h2>
+        <button class="om-btn-action large" onclick="navigateTo('inventoryManager.html', document.querySelector('[data-page=inventory]'))">
+            ← Quay lại Tồn Kho
+        </button>
+    </div>
+
+    <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
+        <!-- Form nhập hàng -->
+        <div style="flex:1; min-width:300px; background:#181818; border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:20px;">
+            <h3 style="color:#C8102E; margin-top:0; margin-bottom:20px; font-size:18px;">Form Nhập Hàng</h3>
+            
+            <div style="margin-bottom:15px;">
+                <label style="display:block; color:#aaa; margin-bottom:6px; font-size:13px;">Chọn xe (Mã xe - Tên xe)</label>
+                <select id="import-car-select" style="width:100%; background:#111; border:1px solid #333; color:#fff; padding:10px 14px; border-radius:8px; font-family:inherit; outline:none;" onchange="updateCurrentStock()">
+                    <option value="">-- Chọn xe --</option>
+                </select>
+                <!-- 4 chỉ số kho hiện tại -->
+                <div id="current-stock-display" style="margin-top:10px;"></div>
+            </div>
+
+            <div style="margin-bottom:15px;">
+                <label style="display:block; color:#aaa; margin-bottom:6px; font-size:13px;">Số lượng nhập</label>
+                <input type="number" id="import-quantity" min="1" value="1" style="width:100%; background:#111; border:1px solid #333; color:#fff; padding:10px 14px; border-radius:8px; font-family:inherit; outline:none;">
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <label style="display:block; color:#aaa; margin-bottom:6px; font-size:13px;">Lý do / Ghi chú</label>
+                <textarea id="import-reason" placeholder="VD: Nhập lô hàng mới tháng 5... (Không bắt buộc)" style="width:100%; background:#111; border:1px solid #333; color:#fff; padding:10px 14px; border-radius:8px; font-family:inherit; outline:none; min-height:80px; resize:vertical;"></textarea>
+            </div>
+
+            <button id="btn-submit-import" onclick="submitImport()" style="width:100%; background:#C8102E; color:#fff; border:none; padding:12px; border-radius:8px; font-weight:600; font-family:inherit; cursor:pointer; transition:all 0.2s;">
+                XÁC NHẬN NHẬP HÀNG
+            </button>
+        </div>
+
+        <!-- Lịch sử nhập hàng (Gần đây) -->
+        <div style="flex:2; min-width:400px; background:#181818; border:1px solid rgba(255,255,255,0.05); border-radius:12px; padding:20px;">
+            <h3 style="color:#eee; margin-top:0; margin-bottom:20px; font-size:18px;">Lịch sử giao dịch (Mới nhất)</h3>
+            <table class="om-table">
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Loại GD</th>
+                        <th>SL</th>
+                        <th>Tổng (trước→sau)</th>
+                        <th>Vật lý (trước→sau)</th>
+                        <th>Giữ chỗ (trước→sau)</th>
+                        <th>Khả dụng (trước→sau)</th>
+                        <th>Lý do</th>
+                    </tr>
+                </thead>
+                <tbody id="import-history-table">
+                    <tr><td colspan="8" style="text-align:center;">Vui lòng chọn xe để xem lịch sử</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — N18-AUTO</title>
+    <link rel="icon" href="/image/LogoWeb.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="/stylecss/manager.css">
+</head>
+<body>
+
+    <!-- ══════════════ SIDEBAR ══════════════ -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+        <!-- Toggle button -->
+        <button class="sidebar__toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <div class="sidebar__brand">
+            <a href="index.html" class="sidebar__logo-link">
+                <img src="/image/LogoWeb.png" alt="N18-AUTO" class="sidebar__logo-img">
+            </a>
+            <span class="sidebar__brand-name">N18-AUTO</span>
+            <span class="sidebar__brand-sub">Admin Panel</span>
+        </div>
+
+        <!-- Admin Info -->
+        <div class="sidebar__admin">
+            <div class="sidebar__avatar">
+                <i class="fa fa-user-shield"></i>
+            </div>
+            <div class="sidebar__admin-info">
+                <span class="sidebar__admin-name" id="admin-name">Administrator</span>
+                <span class="sidebar__admin-role">Super Admin</span>
+            </div>
+        </div>
+
+        <!-- Menu -->
+        <nav class="sidebar__nav">
+            <div class="sidebar__nav-label">QUẢN LÝ</div>
+
+            <button class="sidebar__item active" onclick="navigateTo('dashboard.html', this)" data-page="dashboard">
+                <i class="fa fa-chart-line"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="sidebar__item" onclick="navigateTo('usersManager.html', this)" data-page="users">
+                <i class="fa fa-users"></i>
+                <span>Tài khoản</span>
+            </button>
+
+            <button class="sidebar__item" onclick="navigateTo('customersManager.html', this)" data-page="customers">
+                <i class="fa fa-user-tie"></i>
+                <span>Khách hàng</span>
+            </button>
+
+            <button class="sidebar__item" onclick="navigateTo('carsManager.html', this)" data-page="cars">
+                <i class="fa fa-car"></i>
+                <span>Quản lý Xe</span>
+            </button>
+
+            <button class="sidebar__item" onclick="navigateTo('order.html', this)" data-page="orders">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Đơn hàng</span>
+            </button>
+
+            <div class="sidebar__nav-label">KHO HÀNG</div>
+
+            <button class="sidebar__item" onclick="navigateTo('inventoryManager.html', this)" data-page="inventory">
+                <i class="fa fa-warehouse"></i>
+                <span>Tồn kho</span>
+            </button>
+
+            <!-- C5: stockImport.html đã được gộp vào inventoryManager qua panel. Giữ comment để rollback -->
+            <!-- <button class="sidebar__item" onclick="navigateTo('stockImport.html', this)" data-page="stockimport">
+                <i class="fa fa-truck-ramp-box"></i>
+                <span>Nhập kho</span>
+            </button> -->
+
+            <div class="sidebar__nav-label">MARKETING</div>
+
+            <button class="sidebar__item" onclick="navigateTo('saleManager.html', this)" data-page="sales">
+                <i class="fa fa-tags"></i>
+                <span>Quản lý Sale</span>
+                <span class="sidebar__badge" id="active-sale-count">6</span>
+            </button>
+
+            <button class="sidebar__item" onclick="navigateTo('saleHistory.html', this)" data-page="history">
+                <i class="fa fa-clock-rotate-left"></i>
+                <span>Lịch sử Sale</span>
+            </button>
+
+            <div class="sidebar__nav-divider"></div>
+
+            <button class="sidebar__item sidebar__item--home" onclick="window.location.href='index.html'">
+                <i class="fa fa-arrow-left"></i>
+                <span>Return Home</span>
+            </button>
+        </nav>
+    </aside>
+
+    <!-- ══════════════ MAIN CONTENT ══════════════ -->
+    <main class="admin-main" id="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-topbar">
+            <div class="topbar__left">
+                <button class="topbar__toggle" onclick="toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="topbar__title" id="page-title">Dashboard</h1>
+            </div>
+            <div class="topbar__right">
+                <div class="topbar__search" style="position: relative;">
+                    <i class="fa fa-search"></i>
+                    <input type="text" id="global-search-input" placeholder="Tìm kiếm trang, xe, khách hàng..." autocomplete="off">
+                    <div id="global-search-dropdown" class="search-dropdown" style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; margin-top: 8px; z-index: 1000; max-height: 400px; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.5);"></div>
+                </div>
+                <div class="topbar__date">
+                    <i class="fa fa-calendar"></i>
+                    <span id="current-date"></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Content -->
+        <div class="admin-content" id="admin-content">
+            <!-- Loaded via loadPage() -->
+        </div>
+    </main>
+
+    <!-- ══════════════ TOAST NOTIFICATION ══════════════ -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ══════════════ SCRIPTS ══════════════ -->
+    <script src="/javascript/searchAutocomplete.js"></script>
+    <script src="/javascript/promotions.js"></script>
+    <script src="/javascript/manager.js"></script>
+    <script src="/javascript/dashboard.js"></script>
+    <script src="/javascript/customerMana.js"></script>
+    <script src="/javascript/carMana.js"></script>
+    <script src="/javascript/orderMana.js"></script>
+    <script src="/javascript/testdriveMana.js"></script>
+    <script src="/javascript/userMana.js"></script>
+    <script src="/javascript/saleMana.js"></script>
+    <script src="/javascript/inventoryMana.js"></script>
+    <script src="/javascript/stockImport.js"></script>
+    <script>
+        // Load dashboard by default
+        navigateTo('dashboard.html', document.querySelector('.sidebar__item.active'));
+
+        // Show current date
+        document.getElementById('current-date').textContent =
+            new Date().toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        // Load admin name from localStorage
+        const adminName = localStorage.getItem('name') || 'Administrator';
+        document.getElementById('admin-name').textContent = adminName;
+    </script>
+</body>
+</html>

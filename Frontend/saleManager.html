@@ -1,0 +1,217 @@
+<!-- ═════════════ QUẢN LÝ SALE ═════════════ -->
+
+<!-- Stats Cards -->
+<div class="stats-grid" id="sale-stats">
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--green">
+            <i class="fa fa-fire"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Sale đang chạy</span>
+            <span class="stat-card__value" id="sale-stat-active">0</span>
+            <span class="stat-card__trend stat-card__trend--up">Đang hoạt động</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--gold">
+            <i class="fa fa-clock"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Sắp hết hạn</span>
+            <span class="stat-card__value" id="sale-stat-expiring">0</span>
+            <span class="stat-card__trend stat-card__trend--down">Còn &lt; 3 ngày</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--red">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Đã kết thúc</span>
+            <span class="stat-card__value" id="sale-stat-expired">0</span>
+            <span class="stat-card__trend stat-card__trend--neutral">Tổng cộng</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--blue">
+            <i class="fa fa-chart-bar"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Tổng suất đã dùng</span>
+            <span class="stat-card__value" id="sale-stat-used">0</span>
+            <span class="stat-card__trend stat-card__trend--neutral">Đăng ký KM</span>
+        </div>
+    </div>
+</div>
+
+<!-- Table -->
+<div class="admin-table-wrapper">
+    <div class="admin-table-toolbar">
+        <div class="admin-table-toolbar__search">
+            <i class="fa fa-search"></i>
+            <input type="text" id="sale-search" placeholder="Tìm chương trình KM..." oninput="filterSaleTable()">
+        </div>
+        <div class="admin-table-toolbar__actions">
+            <select id="sale-filter-status" onchange="filterSaleTable()" style="padding:8px 12px; background:rgba(255,255,255,0.06); color:#aaa; border:1px solid #333; border-radius:8px; font-size:13px; font-family:inherit;">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="active">🟢 Đang chạy</option>
+                <option value="upcoming">🟡 Sắp diễn ra</option>
+                <option value="expiring">🔴 Sắp hết hạn</option>
+                <option value="expired">⚫ Đã kết thúc</option>
+            </select>
+            <button class="btn-admin btn-admin--outline" onclick="exportSalesCSV()">
+                <i class="fa fa-download"></i> Export CSV
+            </button>
+            <button class="btn-admin btn-admin--primary" onclick="openSaleModal()">
+                <i class="fa fa-plus"></i> Thêm KM
+            </button>
+        </div>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table class="admin-table" id="sale-table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên chương trình</th>
+                    <th>Xe áp dụng</th>
+                    <th>Loại KM</th>
+                    <th>Giảm giá</th>
+                    <th>Thời gian</th>
+                    <th>Suất</th>
+                    <th>Tiến độ</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="sale-table-body"></tbody>
+        </table>
+    </div>
+
+    <div class="table-pagination" id="sale-pagination">
+        <span class="table-pagination__info" id="sale-pagination-info">Hiển thị 0 / 0</span>
+        <div class="table-pagination__buttons" id="sale-pagination-buttons"></div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="charts-row" style="margin-top: 28px;">
+    <div class="chart-panel">
+        <h3 class="chart-panel__title"><i class="fa fa-chart-pie"></i> Tỷ lệ loại khuyến mãi</h3>
+        <canvas id="sale-type-chart"></canvas>
+    </div>
+    <div class="chart-panel">
+        <h3 class="chart-panel__title"><i class="fa fa-chart-bar"></i> Xe được KM nhiều nhất</h3>
+        <canvas id="sale-car-chart"></canvas>
+    </div>
+</div>
+
+<!-- ═════════════ MODAL: Thêm/Sửa Sale (Nâng cấp) ═════════════ -->
+<div class="edit-modal-overlay" id="sale-modal-overlay">
+    <div class="edit-modal" style="max-width: 680px;">
+        <h3><i class="fa fa-tags"></i> <span id="sale-modal-title">Tạo chương trình khuyến mãi</span></h3>
+        <input type="hidden" id="sale-edit-id" value="">
+
+        <!-- Tên chương trình -->
+        <div class="form-group">
+            <label>Tên chương trình *</label>
+            <input type="text" id="sale-name" placeholder="VD: Ưu đãi tháng 3 - Toyota Fortuner">
+        </div>
+
+        <!-- Xe + Badge -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Xe áp dụng *</label>
+                <select id="sale-car" onchange="onCarSelectChange()">
+                    <option value="">-- Chọn xe --</option>
+                </select>
+                <small class="form-hint" id="car-price-hint" style="color:#22C55E; margin-top:4px; display:block; font-style:italic;"></small>
+            </div>
+            <div class="form-group">
+                <label>Badge hiển thị</label>
+                <select id="sale-badge">
+                    <option value="HOT">🔥 HOT</option>
+                    <option value="MỚI">✨ MỚI</option>
+                    <option value="FLASH SALE">⚡ FLASH SALE</option>
+                    <option value="SẮP HẾT">⏰ SẮP HẾT</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Loại KM -->
+        <div class="form-group">
+            <label>Loại khuyến mãi *</label>
+            <div class="form-radio-group" id="promo-type-radios">
+                <label><input type="radio" name="sale-type" value="cash" checked onchange="handlePromoTypeChange()"> Giảm tiền mặt</label>
+                <label><input type="radio" name="sale-type" value="percent" onchange="handlePromoTypeChange()"> Giảm %</label>
+                <label><input type="radio" name="sale-type" value="gift" onchange="handlePromoTypeChange()"> Tặng phụ kiện</label>
+                <label><input type="radio" name="sale-type" value="combo" onchange="handlePromoTypeChange()"> Kết hợp</label>
+            </div>
+        </div>
+
+        <!-- Tiền / % — 2 ô riêng biệt -->
+        <div class="form-row">
+            <div class="form-group" id="cash-group">
+                <label>Số tiền giảm (VNĐ)</label>
+                <input type="number" id="sale-cash" placeholder="VD: 200000000" oninput="onCashInput()">
+                <small class="form-hint" id="cash-calc-hint" style="color:#22C55E; font-style:italic; margin-top:4px; display:block;"></small>
+            </div>
+            <div class="form-group" id="percent-group">
+                <label>Phần trăm giảm (%)</label>
+                <input type="number" id="sale-percent" placeholder="VD: 15" min="0" max="100" oninput="onPercentInput()">
+                <small class="form-hint" id="percent-calc-hint" style="color:#22C55E; font-style:italic; margin-top:4px; display:block;"></small>
+            </div>
+        </div>
+
+        <!-- Suất + Mô tả -->
+        <div class="form-group">
+            <label>Số suất ưu đãi (0 = Không giới hạn)</label>
+            <input type="number" id="sale-slots" placeholder="VD: 10" value="10">
+        </div>
+
+        <div class="form-group">
+            <label>Mô tả ưu đãi</label>
+            <textarea id="sale-description" rows="2" placeholder="VD: Giảm 100 triệu + Tặng phụ kiện chính hãng"></textarea>
+        </div>
+
+        <!-- Ngày + Giờ bắt đầu / kết thúc -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Ngày bắt đầu *</label>
+                <div style="display:flex; gap:8px;">
+                    <input type="date" id="sale-start-date" style="flex:1;">
+                    <input type="time" id="sale-start-time" value="00:00" style="width:120px;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Ngày kết thúc *</label>
+                <div style="display:flex; gap:8px;">
+                    <input type="date" id="sale-end-date" style="flex:1;">
+                    <input type="time" id="sale-end-time" value="23:59" style="width:120px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Ảnh + Trạng thái -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Hình ảnh banner KM</label>
+                <input type="text" id="sale-image" placeholder="URL ảnh hoặc /image/img_banner/...">
+            </div>
+            <div class="form-group">
+                <label>Trạng thái</label>
+                <select id="sale-status">
+                    <option value="true">🟢 Kích hoạt</option>
+                    <option value="false">⚫ Tạm ẩn</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeSaleModal()">Hủy</button>
+            <button class="btn-save" onclick="saveSale()">
+                <i class="fa fa-check"></i> Lưu khuyến mãi
+            </button>
+        </div>
+    </div>
+</div>

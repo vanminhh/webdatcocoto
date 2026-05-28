@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^8.13.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "name": "webbanoto",
+  "version": "1.0.0",
+  "description": "<!-- WebsiteAutoCar --> Giới thiệu về Anh Huy Auto – Trang web bán ô tô đẳng cấp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minhvuogdzz/webbanoto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minhvuogdzz/webbanoto/issues"
+  },
+  "homepage": "https://github.com/minhvuogdzz/webbanoto#readme",
+  "devDependencies": {
+    "kill-port": "^2.0.1"
+  }
+}

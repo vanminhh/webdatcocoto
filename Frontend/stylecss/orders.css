@@ -1,0 +1,572 @@
+/* ════════════════════════════════════
+   ORDERS PAGE — Dark Theme + Red Accent
+   ════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #121212;
+    color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+.orders-header {
+    background: #1a1a1a;
+    border-bottom: 2px solid #e02424;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.orders-header__logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #e02424;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.orders-header__back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.orders-header__back:hover {
+    border-color: #e02424;
+    color: #fff;
+}
+
+/* ── Page Container ── */
+.orders-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ── Page Title ── */
+.orders-page-title {
+    margin-bottom: 32px;
+}
+
+.orders-page-title h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.orders-page-title h1 span {
+    color: #e02424;
+}
+
+.orders-page-title p {
+    color: #888;
+    font-size: 0.95rem;
+}
+
+/* ── Summary bar ── */
+.orders-summary {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.orders-summary__item {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 14px 22px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.orders-summary__count {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e02424;
+}
+
+.orders-summary__label {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* ── Filter tabs ── */
+.orders-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.orders-filter__btn {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.orders-filter__btn:hover {
+    border-color: #e02424;
+    color: #fff;
+}
+
+.orders-filter__btn.active {
+    background: #e02424;
+    border-color: #e02424;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ── Order Card ── */
+.order-card {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.order-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: #e02424;
+    border-radius: 4px 0 0 4px;
+}
+
+.order-card:hover {
+    border-color: #e02424;
+    transform: translateY(-2px);
+}
+
+/* ── Car Image ── */
+.order-card__image-wrap {
+    width: 110px;
+    height: 75px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #2a2a2a;
+}
+
+.order-card__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-card__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-size: 2rem;
+}
+
+/* ── Card Body ── */
+.order-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.order-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.order-card__code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: #888;
+    background: #2a2a2a;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.order-card__type-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(224, 36, 36, 0.12);
+    border: 1px solid rgba(224, 36, 36, 0.3);
+    color: #e02424;
+    font-weight: 500;
+}
+
+.order-card__car-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.order-card__details {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.order-card__detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.83rem;
+    color: #999;
+}
+
+.order-card__detail i {
+    color: #666;
+    width: 14px;
+    text-align: center;
+}
+
+/* ── Status Badge ── */
+.order-card__right {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.status-badge.pending {
+    background: rgba(255, 193, 7, 0.12);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+}
+
+.status-badge.pending_payment {
+    background: rgba(255, 145, 0, 0.12);
+    border: 1px solid rgba(255, 145, 0, 0.3);
+    color: #ff9100;
+}
+
+.status-badge.deposited {
+    background: rgba(33, 150, 243, 0.12);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+    color: #2196F3;
+}
+
+.status-badge.purchased {
+    background: rgba(76, 175, 80, 0.12);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #4CAF50;
+}
+
+.status-badge.cancelled {
+    background: rgba(244, 67, 54, 0.12);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #f44336;
+}
+
+.status-badge.deposit_expired {
+    background: rgba(158, 158, 158, 0.12);
+    border: 1px solid rgba(158, 158, 158, 0.3);
+    color: #9e9e9e;
+}
+
+.order-card__deposit {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e02424;
+}
+
+.order-card__deposit-label {
+    font-size: 0.72rem;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+/* ── Empty State ── */
+.orders-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #555;
+}
+
+.orders-empty i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.4;
+}
+
+.orders-empty h3 {
+    font-size: 1.3rem;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.orders-empty p {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+.orders-empty__link {
+    display: inline-block;
+    padding: 12px 28px;
+    background: #e02424;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.orders-empty__link:hover { background: #c01e1e; }
+
+/* ── Loading skeleton ── */
+.orders-skeleton {
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.skeleton-img { width: 110px; height: 75px; border-radius: 8px; background: #2a2a2a; animation: pulse 1.4s ease-in-out infinite; }
+.skeleton-line { height: 14px; border-radius: 4px; background: #2a2a2a; animation: pulse 1.4s ease-in-out infinite; }
+.skeleton-line--sm { width: 60%; height: 10px; }
+.skeleton-body { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ── Auth Guard ── */
+.auth-guard {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.auth-guard i { font-size: 3rem; color: #e02424; margin-bottom: 20px; display: block; }
+.auth-guard h2 { color: #fff; margin-bottom: 10px; }
+.auth-guard p { color: #888; margin-bottom: 24px; }
+.auth-guard__link {
+    display: inline-block;
+    padding: 12px 28px;
+    background: #e02424;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .order-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .order-card__image-wrap { width: 100%; height: 160px; }
+    .order-card__right { text-align: left; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .orders-summary { flex-direction: row; }
+    .orders-header { padding: 14px 16px; }
+}
+
+/* ── Nút hủy đơn ── */
+.order-cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 6px 14px;
+    background: rgba(244, 67, 54, 0.08);
+    border: 1px solid rgba(244, 67, 54, 0.35);
+    color: #f44336;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s;
+}
+
+.order-cancel-btn:hover {
+    background: rgba(244, 67, 54, 0.18);
+    border-color: #f44336;
+}
+
+.order-cancel-btn--contact {
+    background: rgba(255, 152, 0, 0.08);
+    border-color: rgba(255, 152, 0, 0.35);
+    color: #ff9800;
+}
+
+.order-cancel-btn--contact:hover {
+    background: rgba(255, 152, 0, 0.18);
+    border-color: #ff9800;
+}
+
+/* ── Modal xác nhận hủy ── */
+.cancel-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.cancel-modal-box {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 36px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+.cancel-modal-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(244, 67, 54, 0.1);
+    border: 2px solid rgba(244, 67, 54, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #f44336;
+    margin: 0 auto 20px;
+}
+
+.cancel-modal-box h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    border: none;
+    padding: 0;
+}
+
+.cancel-modal-box p {
+    color: #bbb;
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.cancel-modal-note {
+    font-size: 0.8rem !important;
+    color: #666 !important;
+    background: #252525;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border-left: 3px solid #444;
+    margin-bottom: 24px !important;
+    text-align: left;
+}
+
+.cancel-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.cancel-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s;
+}
+
+.cancel-modal-btn--back {
+    background: #2a2a2a;
+    color: #ccc;
+    border: 1px solid #333;
+}
+
+.cancel-modal-btn--back:hover {
+    background: #333;
+    color: #fff;
+}
+
+.cancel-modal-btn--confirm {
+    background: #e02424;
+    color: #fff;
+}
+
+.cancel-modal-btn--confirm:hover {
+    background: #c01e1e;
+}
+
+.cancel-modal-btn--confirm:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+/* ── Toast animation ── */
+@keyframes slideUp {
+    from { transform: translate(-50%, 20px); opacity: 0; }
+    to   { transform: translateX(-50%);       opacity: 1; }
+}

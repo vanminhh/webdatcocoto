@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/globals/globals1.css" />
+  <link rel="stylesheet" href="/guide/styleguide1.css" />
+  <link rel="stylesheet" href="/stylecss/style1.css" />
+  <link rel="stylesheet" href="/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <title>Login</title>
+  <link rel="icon" href="/image/LogoWeb.png">
+  <script src="https://accounts.google.com/gsi/client" async defer
+    data-client_id="1013513995188-gjqtc0alja2057keaoa9u0lk626a143r.apps.googleusercontent.com"></script>
+  <script src="/javascript/login.js" defer></script>
+
+</head>
+
+<body>
+  <div class="sign-in">
+    <!-- <img src="/image/back.png" alt="Background" class="background" /> -->
+    <div class="header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="/image/LogoWeb.png" alt="Car Rental Logo">
+        </a>
+      </div>
+      <a href="aboutus.html" class="aboutus"><i class="fa fa-question-circle"></i>
+        <p>About US</p>
+      </a>
+    </div>
+    <div class="frame">
+      <div class="hello-welcome-back">Hello !<br />Welcome Back</div>
+      <!-- Bọc toàn bộ input + button đăng nhập vào form -->
+      <form id="loginForm">
+        <div class="input-field">
+          <label class="input">
+            <input type="text" id="emailOrUser" class="input-box" placeholder="Email or User">
+          </label>
+        </div>
+        <div class="div">
+          <div class="input-field-2">
+            <label class="input2">
+              <input type="password" id="password" class="input2-box" placeholder="Password">
+            </label>
+          </div>
+          <button type="button" class="button" onclick="alert('Bạn bị quên mật khẩu? \nĐể khôi phục đăng nhập vui liên hệ bộ phận hỗ trợ kĩ thuật của N18-AUTO: \nEmail: anhhuyauto88engineering@gmail.com \nHotline: 0888.666.888')">Forget password?</button>
+        </div>
+        <button type="submit" class="button-3">Sign In</button>
+      </form>
+      <a href="signup.html">
+        <button class="button-5">Register</button>
+      </a>
+      <div class="pngwing-com-wrapper">
+        <img class="pngwing-com" src="/image/google.png" />
+        <button id="google-login" class="button-6">Google</button>
+      </div>
+      <div class="text-wrapper-3">connect with</div>
+    </div>
+    <div class="logo-home">
+      <a href="index.html">
+        <img class="logoweb" src="/image/LogoWeb.png" alt="Logo Website" />
+      </a>
+    </div>
+</body>
+<script>
+  // Display error message if present in the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const errorMessage = urlParams.get("error");
+  if (errorMessage) {
+    const errorDiv = document.getElementById("error-message");
+    errorDiv.textContent = errorMessage;
+    errorDiv.style.display = "block";
+  }
+</script>
+
+</html>

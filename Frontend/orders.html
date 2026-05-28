@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lịch sử đặt xe của bạn tại N18 Auto – xem trạng thái, tiền cọc và thông tin đặt hàng.">
+    <title>Đơn Đặt Xe Của Tôi — N18 AUTO</title>
+    <link rel="icon" href="/image/LogoWeb.png">
+
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/stylecss/orders.css">
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="orders-header">
+        <a href="/index.html" class="orders-header__logo">N18 AUTO</a>
+        <div style="display:flex; align-items:center; gap:16px;">
+            <span id="header-user" style="color:#aaa; font-size:0.88rem; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+            <a href="/index.html" class="orders-header__back">
+                <i class="fas fa-arrow-left"></i>
+                Trang chủ
+            </a>
+        </div>
+    </header>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="orders-container" id="orders-content">
+
+        <!-- Page title -->
+        <div class="orders-page-title">
+            <h1>Đơn Đặt Xe <span>Của Tôi</span></h1>
+            <p>Theo dõi trạng thái và lịch sử đặt xe của bạn</p>
+        </div>
+
+        <!-- Summary bar -->
+        <div class="orders-summary">
+            <div class="orders-summary__item">
+                <div class="orders-summary__count" id="sum-total">—</div>
+                <div class="orders-summary__label">Tổng đơn</div>
+            </div>
+            <div class="orders-summary__item">
+                <div class="orders-summary__count" id="sum-pending" style="color:#ffc107;">—</div>
+                <div class="orders-summary__label">Chờ xác nhận</div>
+            </div>
+            <div class="orders-summary__item">
+                <div class="orders-summary__count" id="sum-deposited" style="color:#2196F3;">—</div>
+                <div class="orders-summary__label">Đã cọc</div>
+            </div>
+            <div class="orders-summary__item">
+                <div class="orders-summary__count" id="sum-purchased" style="color:#4CAF50;">—</div>
+                <div class="orders-summary__label">Đã mua</div>
+            </div>
+            <div class="orders-summary__item">
+                <div class="orders-summary__count" id="sum-cancelled" style="color:#f44336;">—</div>
+                <div class="orders-summary__label">Đã hủy</div>
+            </div>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="orders-filter">
+            <button class="orders-filter__btn active" data-filter="all" onclick="filterOrders('all')">
+                <i class="fas fa-list"></i> Tất cả
+            </button>
+            <button class="orders-filter__btn" data-filter="active" onclick="filterOrders('active')">
+                <i class="fas fa-spinner"></i> Đang xử lý
+            </button>
+            <button class="orders-filter__btn" data-filter="done" onclick="filterOrders('done')">
+                <i class="fas fa-check-circle"></i> Đã mua
+            </button>
+            <button class="orders-filter__btn" data-filter="cancelled" onclick="filterOrders('cancelled')">
+                <i class="fas fa-times-circle"></i> Đã hủy
+            </button>
+        </div>
+
+        <!-- Orders list -->
+        <div id="orders-list">
+            <!-- Render by JS -->
+        </div>
+
+    </main>
+
+    <!-- ═══ MODAL: XÁC NHẬN HỦY ĐƠN ═══ -->
+    <div id="cancel-modal" style="display:none;" class="cancel-modal-overlay" onclick="if(event.target===this) closeCancelModal()">
+        <div class="cancel-modal-box">
+            <div class="cancel-modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Xác nhận hủy đơn?</h3>
+            <p>Bạn có chắc muốn hủy đơn đặt xe <strong id="cancel-modal-car"></strong> không?</p>
+            <p class="cancel-modal-note">Đơn chưa thanh toán sẽ được hủy ngay và tồn kho được hoàn lại.</p>
+            <div class="cancel-modal-actions">
+                <button class="cancel-modal-btn cancel-modal-btn--back" onclick="closeCancelModal()">
+                    <i class="fas fa-arrow-left"></i> Giữ đơn
+                </button>
+                <button class="cancel-modal-btn cancel-modal-btn--confirm" id="confirm-cancel-btn" onclick="cancelOrder()">
+                    <i class="fas fa-times"></i> Xác nhận hủy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascript/orders.js"></script>
+</body>
+</html>

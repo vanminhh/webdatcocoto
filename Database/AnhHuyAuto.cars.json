@@ -1,0 +1,509 @@
+[
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a29719d"
+    },
+    "name": "INNOVA CROSS HEV",
+    "id": "1",
+    "URL": "/image/1.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 1000000000,
+    "seats": 7,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a29719e"
+    },
+    "name": "YARIS CROSS HEV",
+    "id": "2",
+    "URL": "/image/2.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 765000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a29719f"
+    },
+    "name": "YARIS CROSS",
+    "id": "3",
+    "URL": "/image/3.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 650000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a0"
+    },
+    "name": "COROLLA CROSS HEV",
+    "id": "4",
+    "URL": "/image/4.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 913000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a1"
+    },
+    "name": "COROLLA CROSS Xăng",
+    "id": "5",
+    "URL": "/image/5.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 828000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a2"
+    },
+    "name": "RAIZE",
+    "id": "6",
+    "URL": "/image/6.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 498000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a3"
+    },
+    "name": "FORTUNER 2.7AT 4x2",
+    "id": "7",
+    "URL": "/image/7.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 1155000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a4"
+    },
+    "name": "FORTUNER LEGENDER 2.7AT 4X2",
+    "id": "8",
+    "URL": "/image/8.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 1290000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a5"
+    },
+    "name": "FORTUNER LEGENDER 2.7AT 4X4",
+    "id": "9",
+    "URL": "/image/9.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 1395000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a6"
+    },
+    "name": "FORTUNER 2.4AT 4X2",
+    "id": "10",
+    "URL": "/image/10.png",
+    "Fuel": "OIL",
+    "Type": "SUV",
+    "Price": 1055000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a7"
+    },
+    "name": "FORTUNER LEGENDER 2.4AT 4X2",
+    "id": "11",
+    "URL": "/image/11.png",
+    "Fuel": "OIL",
+    "Type": "SUV",
+    "Price": 1185000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a8"
+    },
+    "name": "FORTUNER LEGENDER 2.8AT 4X4",
+    "id": "12",
+    "URL": "/image/12.png",
+    "Fuel": "OIL",
+    "Type": "SUV",
+    "Price": 1350000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971a9"
+    },
+    "name": "LAND CRUISER 300",
+    "id": "13",
+    "URL": "/image/13.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 4580000000,
+    "seats": 7,
+    "transmission": "Tự động 10 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971aa"
+    },
+    "name": "LAND CRUISER PRADO",
+    "id": "14",
+    "URL": "/image/14.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 3480000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77103e36d37687a2971ab"
+    },
+    "name": "LAND CRUISER M",
+    "id": "15",
+    "URL": "/image/15.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 3460000000,
+    "seats": 7,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971ad"
+    },
+    "name": "INNOVA CROSS HEV",
+    "id": "16",
+    "URL": "/image/16.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 488000000,
+    "seats": 7,
+    "transmission": "E-CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971ae"
+    },
+    "name": "INNOVA CROSS",
+    "id": "17",
+    "URL": "/image/17.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 825000000,
+    "seats": 7,
+    "transmission": "Tự động 10 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971af"
+    },
+    "name": "VELOZ CROSS CVT TOP",
+    "id": "18",
+    "URL": "/image/18.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 660000000,
+    "seats": 7,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b0"
+    },
+    "name": "VELOZ CROSS CVT",
+    "id": "19",
+    "URL": "/image/19.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 638000000,
+    "seats": 7,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b1"
+    },
+    "name": "AVANZA PREMIO CVT",
+    "id": "20",
+    "URL": "/image/20.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 598000000,
+    "seats": 7,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b2"
+    },
+    "name": "AVANZA PREMIO MT",
+    "id": "21",
+    "URL": "/image/21.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 558000000,
+    "seats": 7,
+    "transmission": "Số sàn 5 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b3"
+    },
+    "name": "INOVA 2.0E",
+    "id": "22",
+    "URL": "/image/22.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 755000000,
+    "seats": 8,
+    "transmission": "Số sàn 5 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b4"
+    },
+    "name": "ALPHARD",
+    "id": "23",
+    "URL": "/image/23.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 4510000000,
+    "seats": 7,
+    "transmission": "Tự động 8 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e7711ce36d37687a2971b5"
+    },
+    "name": "ALPHARD 2.0",
+    "id": "24",
+    "URL": "/image/24.png",
+    "Fuel": "GAS",
+    "Type": "Service Car",
+    "Price": 4615000000,
+    "seats": 7,
+    "transmission": "Tự động 8 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971b7"
+    },
+    "name": "VIOS 1.5E-CVT",
+    "id": "25",
+    "URL": "/image/25.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 488000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971b8"
+    },
+    "name": "VIOS 1.5E-MT",
+    "id": "26",
+    "URL": "/image/26.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 458000000,
+    "seats": 5,
+    "transmission": "Số sàn 5 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971b9"
+    },
+    "name": "VIOS 1.5G-CVT",
+    "id": "27",
+    "URL": "/image/27.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 545000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971ba"
+    },
+    "name": "COROLLA ALTIS 1.8V",
+    "id": "28",
+    "URL": "/image/28.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 780000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971bb"
+    },
+    "name": "COROLLA ALTIS 1.8HEV",
+    "id": "29",
+    "URL": "/image/29.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 870000000,
+    "seats": 5,
+    "transmission": "E-CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971bc"
+    },
+    "name": "COROLLA ALTIS 1.8G",
+    "id": "30",
+    "URL": "/image/30.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 725000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971bd"
+    },
+    "name": "Camry HEV TOP CE",
+    "id": "31",
+    "URL": "/image/31.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 1530000000,
+    "seats": 5,
+    "transmission": "E-CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971be"
+    },
+    "name": "Camry HEV MID CE",
+    "id": "32",
+    "URL": "/image/32.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 1460000000,
+    "seats": 5,
+    "transmission": "E-CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77134e36d37687a2971bf"
+    },
+    "name": "Camry 2.0Q",
+    "id": "33",
+    "URL": "/image/33.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 1220000000,
+    "seats": 5,
+    "transmission": "CVT"
+  },
+  {
+    "_id": {
+      "$oid": "67e77146e36d37687a2971c1"
+    },
+    "name": "HILUX 2.4L 4x2 AT",
+    "id": "34",
+    "URL": "/image/34.png",
+    "Fuel": "OIL",
+    "Type": "TRUCK",
+    "Price": 706000000,
+    "seats": 5,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77146e36d37687a2971c2"
+    },
+    "name": "HILUX 2.4L 4x4 MT",
+    "id": "35",
+    "URL": "/image/35.png",
+    "Fuel": "OIL",
+    "Type": "TRUCK",
+    "Price": 676000000,
+    "seats": 5,
+    "transmission": "Số sàn 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77146e36d37687a2971c3"
+    },
+    "name": "HILUX 2.8L 4x4 AT ADVENTURE",
+    "id": "36",
+    "URL": "/image/36.png",
+    "Fuel": "OIL",
+    "Type": "TRUCK",
+    "Price": 999000000,
+    "seats": 5,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e77146e36d37687a2971c4"
+    },
+    "name": "HILUX 2.4L 4x2 AT",
+    "id": "37",
+    "URL": "/image/37.png",
+    "Fuel": "GAS",
+    "Type": "Hatchback",
+    "Price": 405000000,
+    "seats": 5,
+    "transmission": "Tự động 6 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e917d942fa37bfd930a537"
+    },
+    "name": "Lexus LX 600",
+    "id": "38",
+    "URL": "/image/38.png",
+    "Fuel": "GAS",
+    "Type": "SUV",
+    "Price": 8750000000,
+    "seats": 7,
+    "transmission": "Tự động 10 cấp"
+  },
+  {
+    "_id": {
+      "$oid": "67e917d942fa37bfd930a538"
+    },
+    "name": "Lexus ES 2025",
+    "id": "39",
+    "URL": "/image/39.png",
+    "Fuel": "GAS",
+    "Type": "Sedan",
+    "Price": 2650000000,
+    "seats": 5,
+    "transmission": "CVT"
+  }
+]

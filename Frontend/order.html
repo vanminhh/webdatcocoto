@@ -1,0 +1,390 @@
+<!-- ═══════════════════════════════════════════════════════
+     QUẢN LÝ LỊCH ĐẶT CỌC — N18-AUTO Admin
+     5 trạng thái | Tab bar | Date picker modal | SVG only
+     ═══════════════════════════════════════════════════════ -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+.om { font-family: 'Be Vietnam Pro', sans-serif; }
+
+/* ── Header ── */
+.om-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.om-header__title { font-size: 26px; font-weight: 800; color: #eee; margin: 0; }
+.om-header__title span { color: #C8102E; }
+.om-header__actions { display: flex; gap: 8px; }
+.om-header__badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 8px;
+    background: rgba(200,16,46,0.1); border: 1px solid rgba(200,16,46,0.3);
+    color: #C8102E; font-size: 11px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+}
+.om-header__badge:hover { background: rgba(200,16,46,0.2); border-color: rgba(200,16,46,0.5); }
+.om-header__badge--cleanup {
+    background: rgba(245,166,35,0.1); border-color: rgba(245,166,35,0.3);
+    color: #F5A623;
+}
+.om-header__badge--cleanup:hover { background: rgba(245,166,35,0.2); }
+.om-header__dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #C8102E;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(200,16,46,0.4); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(200,16,46,0); }
+}
+
+/* ── Stat Cards ── */
+.om-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 24px; }
+.om-stat {
+    background: #181818; border-radius: 12px; padding: 16px;
+    border: 1px solid transparent; transition: all 0.25s; cursor: default;
+}
+.om-stat:hover { transform: translateY(-2px); }
+.om-stat--pending   { border-color: rgba(200,16,46,0.3); }
+.om-stat--deposited { border-color: rgba(245,166,35,0.3); }
+.om-stat--purchased { border-color: rgba(39,174,96,0.3); }
+.om-stat--cancelled { border-color: rgba(220,53,69,0.3); }
+.om-stat--expired   { border-color: rgba(168,85,247,0.3); }
+.om-stat__icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+}
+.om-stat--pending   .om-stat__icon { background: rgba(200,16,46,0.15); color: #C8102E; }
+.om-stat--deposited .om-stat__icon { background: rgba(245,166,35,0.15); color: #F5A623; }
+.om-stat--purchased .om-stat__icon { background: rgba(39,174,96,0.15);  color: #27AE60; }
+.om-stat--cancelled .om-stat__icon { background: rgba(220,53,69,0.15);  color: #DC3545; }
+.om-stat--expired   .om-stat__icon { background: rgba(168,85,247,0.15); color: #A855F7; }
+.om-stat__number { font-size: 28px; font-weight: 900; color: #eee; line-height: 1; margin-bottom: 4px; }
+.om-stat__label { font-size: 11px; font-weight: 500; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── Tab Bar ── */
+.om-tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid #222; padding-bottom: 0; }
+.om-tab {
+    padding: 10px 18px; border-radius: 8px 8px 0 0; cursor: pointer;
+    font-size: 12px; font-weight: 600; color: #666;
+    background: transparent; border: 1px solid transparent; border-bottom: none;
+    transition: all 0.2s; font-family: 'Be Vietnam Pro', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+}
+.om-tab:hover { color: #bbb; background: rgba(255,255,255,0.02); }
+.om-tab.active { color: #C8102E; background: #181818; border-color: #222; border-bottom-color: #181818; margin-bottom: -1px; }
+.om-tab__count {
+    background: rgba(255,255,255,0.08); color: #888; padding: 2px 7px;
+    border-radius: 10px; font-size: 10px; font-weight: 700;
+}
+.om-tab.active .om-tab__count { background: rgba(200,16,46,0.15); color: #C8102E; }
+
+/* ── Toolbar ── */
+.om-toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.om-toolbar__search-wrap { position: relative; flex: 1; max-width: 280px; }
+.om-toolbar__search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #555; pointer-events: none; }
+.om-toolbar__search {
+    background: #181818; border: 1px solid rgba(255,255,255,0.1);
+    color: #ccc; padding: 9px 14px 9px 38px; border-radius: 8px;
+    font-size: 13px; font-family: 'Be Vietnam Pro', sans-serif; outline: none; width: 100%;
+}
+.om-toolbar__search:focus { border-color: #C8102E; }
+.om-toolbar__search::placeholder { color: #555; }
+
+/* ── Table ── */
+.om-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+.om-table thead th {
+    background: #181818; color: #666; font-weight: 600;
+    text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.5px;
+    padding: 12px 14px; border-bottom: 1px solid #222; text-align: left; white-space: nowrap;
+}
+.om-table tbody tr { border-bottom: 1px solid #1a1a1a; transition: background 0.15s; }
+.om-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.om-table tbody td { padding: 12px 14px; color: #bbb; vertical-align: middle; }
+.om-table__expired { background: rgba(220,53,69,0.06) !important; }
+
+/* Status select */
+.om-status-select {
+    background: #181818; border: 1px solid rgba(255,255,255,0.1);
+    color: #ccc; padding: 5px 8px; border-radius: 6px;
+    font-size: 11px; font-weight: 600; outline: none;
+    font-family: 'Be Vietnam Pro', sans-serif; cursor: pointer; width: 130px;
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+}
+.om-status-select:focus { border-color: #C8102E; }
+
+/* Badges */
+.om-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700;
+    white-space: nowrap;
+}
+.om-badge--warning { background: rgba(245,166,35,0.15); color: #F5A623; }
+.om-badge--danger  { background: rgba(220,53,69,0.15);  color: #DC3545; }
+.om-badge--success { background: rgba(39,174,96,0.15);  color: #27AE60; }
+.om-badge--purple  { background: rgba(168,85,247,0.15); color: #A855F7; }
+.om-badge--ghost   { background: rgba(255,255,255,0.05);color: #888; }
+
+/* Delete button */
+.om-btn-delete {
+    background: rgba(220,53,69,0.1); border: 1px solid rgba(220,53,69,0.2);
+    color: #DC3545; padding: 5px 10px; border-radius: 6px;
+    cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
+}
+.om-btn-delete:hover { background: rgba(220,53,69,0.2); border-color: rgba(220,53,69,0.4); }
+
+.om-empty { text-align: center; color: #555; padding: 48px 20px; font-size: 14px; }
+
+/* ── Checkbox ── */
+.om-checkbox {
+    width: 16px; height: 16px; accent-color: #C8102E; cursor: pointer;
+    vertical-align: middle;
+}
+
+/* ── Bulk Action Bar ── */
+.om-bulk-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(200,16,46,0.08); border: 1px solid rgba(200,16,46,0.25);
+    border-radius: 8px; padding: 8px 14px;
+    transition: all 0.25s;
+    flex-wrap: wrap;
+}
+.om-bulk-bar__count {
+    color: #C8102E; font-size: 13px; font-weight: 700; margin-right: 4px;
+}
+.om-bulk-bar__text { color: #aaa; font-size: 13px; }
+.om-bulk-bar__btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 7px; border: none;
+    font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+.om-bulk-bar__btn--delete {
+    background: rgba(220,53,69,0.15); color: #DC3545; border: 1px solid rgba(220,53,69,0.3);
+}
+.om-bulk-bar__btn--delete:hover { background: rgba(220,53,69,0.3); }
+.om-bulk-bar__btn--deleteall {
+    background: rgba(220,53,69,0.85); color: #fff; border: 1px solid transparent;
+}
+.om-bulk-bar__btn--deleteall:hover { background: #C8102E; }
+.om-bulk-bar__btn--ghost {
+    background: transparent; color: #888; border: 1px solid #333;
+}
+.om-bulk-bar__btn--ghost:hover { color: #fff; border-color: #555; }
+
+/* ── Modal Base ── */
+.om-modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); z-index: 9999;
+    align-items: center; justify-content: center;
+}
+.om-modal-overlay.active { display: flex; }
+.om-modal {
+    background: #1a1a1a; border-radius: 16px; padding: 28px;
+    width: 440px; max-width: 90%; border: 1px solid #333;
+}
+.om-modal__title { color: #eee; font-size: 18px; font-weight: 800; margin-bottom: 16px; }
+.om-modal__title span { color: #C8102E; }
+.om-modal__label { color: #888; font-size: 12px; font-weight: 600; margin-bottom: 6px; display: block; }
+.om-modal__input {
+    background: #111; border: 1px solid #333; color: #eee; padding: 10px 14px;
+    border-radius: 8px; font-size: 14px; width: 100%; outline: none;
+    font-family: 'Be Vietnam Pro', sans-serif; box-sizing: border-box;
+}
+.om-modal__input:focus { border-color: #C8102E; }
+.om-modal__hint { color: #666; font-size: 11px; margin-top: 6px; margin-bottom: 0; }
+.om-modal__actions { display: flex; gap: 10px; margin-top: 20px; }
+.om-modal__btn {
+    flex: 1; padding: 10px 16px; border-radius: 8px; border: none;
+    font-size: 13px; font-weight: 600; font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer; transition: all 0.2s;
+}
+.om-modal__btn--primary { background: #C8102E; color: #fff; }
+.om-modal__btn--primary:hover { background: #9B0B22; }
+.om-modal__btn--ghost { background: transparent; border: 1px solid #444; color: #aaa; }
+.om-modal__btn--ghost:hover { border-color: #666; color: #fff; }
+
+/* ── Error/Success messages ── */
+.om-modal__error {
+    color: #DC3545; font-size: 12px; font-weight: 500; margin-top: 6px;
+    display: none; align-items: center; gap: 5px;
+}
+.om-modal__error.show { display: flex; }
+.om-modal__error svg { flex-shrink: 0; }
+.om-modal__field { margin-bottom: 16px; }
+.om-modal__field:last-of-type { margin-bottom: 0; }
+.om-modal__input--error { border-color: #DC3545 !important; }
+
+/* ── Confirm Modal ── */
+.om-confirm__text { color: #bbb; font-size: 14px; line-height: 1.6; margin-bottom: 8px; }
+.om-confirm__highlight { color: #fff; font-weight: 700; }
+
+/* ── Car info inside modal ── */
+.om-modal__car-info {
+    background: #111; border: 1px solid #222; border-radius: 8px;
+    padding: 10px 14px; font-size: 12px; color: #888; margin-bottom: 16px;
+}
+.om-modal__car-info strong { color: #eee; font-weight: 600; }
+.om-modal__car-price { color: #C8102E; font-weight: 700; }
+
+/* ── Custom Calendar Picker ── */
+.om-calendar { background: #111; border: 1px solid #333; border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+.om-calendar__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.om-calendar__month { color: #eee; font-size: 13px; font-weight: 700; }
+.om-calendar__nav {
+    background: transparent; border: 1px solid #333; color: #888; width: 28px; height: 28px;
+    border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+}
+.om-calendar__nav:hover { color: #fff; border-color: #C8102E; background: rgba(200,16,46,0.1); }
+.om-calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.om-calendar__dow {
+    color: #555; font-size: 10px; font-weight: 700; text-transform: uppercase;
+    padding: 4px 0; letter-spacing: 0.5px;
+}
+.om-calendar__day {
+    color: #bbb; font-size: 12px; font-weight: 500; padding: 6px 0;
+    border-radius: 6px; cursor: pointer; transition: all 0.15s; border: none; background: transparent;
+}
+.om-calendar__day:hover:not(.disabled):not(.selected) { background: rgba(255,255,255,0.06); color: #fff; }
+.om-calendar__day.selected { background: #C8102E; color: #fff; font-weight: 700; }
+.om-calendar__day.today:not(.selected) { color: #C8102E; font-weight: 700; border: 1px solid rgba(200,16,46,0.4); }
+.om-calendar__day.disabled { color: #333; cursor: not-allowed; }
+.om-calendar__day.other-month { color: #333; }
+.om-calendar__footer { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid #222; }
+.om-calendar__footer-btn {
+    background: transparent; border: none; color: #888; font-size: 11px; font-weight: 600;
+    cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: all 0.15s;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+.om-calendar__footer-btn:hover { color: #C8102E; background: rgba(200,16,46,0.08); }
+.om-calendar__text-input {
+    background: #0a0a0a; border: 1px solid #333; color: #eee; padding: 8px 12px;
+    border-radius: 8px; font-size: 13px; width: 100%; outline: none;
+    font-family: 'Be Vietnam Pro', sans-serif; box-sizing: border-box; margin-top: 6px;
+}
+.om-calendar__text-input:focus { border-color: #C8102E; }
+.om-calendar__text-input::placeholder { color: #444; }
+
+@media (max-width: 1200px) { .om-stats { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .om-stats { grid-template-columns: repeat(2, 1fr); } .om-toolbar { flex-wrap: wrap; } .om-tabs { overflow-x: auto; } }
+</style>
+
+<div class="om">
+    <!-- ═══ Header ═══ -->
+    <div class="om-header">
+        <h2 class="om-header__title">Quản lý <span>Lịch đặt cọc</span></h2>
+        <div class="om-header__actions">
+            <button class="om-header__badge om-header__badge--cleanup" onclick="cleanupCancelled()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                Dọn dẹp cũ
+            </button>
+            <button class="om-header__badge" onclick="autoExpireAll()">
+                <span class="om-header__dot"></span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Auto-check hết hạn
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══ Stat Cards ═══ -->
+    <div class="om-stats" id="order-stats"></div>
+
+    <!-- ═══ Tab Bar ═══ -->
+    <div class="om-tabs" id="order-tabs"></div>
+
+    <!-- ═══ Toolbar ═══ -->
+    <div class="om-toolbar">
+        <div class="om-toolbar__search-wrap">
+            <svg class="om-toolbar__search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input class="om-toolbar__search" id="order-search" type="text" placeholder="Tìm SĐT / tên khách..." oninput="filterOrders()">
+        </div>
+        <button class="om-bulk-bar__btn om-bulk-bar__btn--deleteall" onclick="deleteAllOrders()" style="margin-left:auto;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            Xóa tất cả
+        </button>
+    </div>
+
+    <!-- ═══ Bulk Action Bar (hiện khi chọn) ═══ -->
+    <div class="om-bulk-bar" id="bulk-action-bar" style="display:none; margin-bottom:14px;">
+        <span class="om-bulk-bar__count" id="bulk-count">0</span>
+        <span class="om-bulk-bar__text">đơn được chọn</span>
+        <button class="om-bulk-bar__btn om-bulk-bar__btn--delete" onclick="deleteSelectedOrders()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"/></svg>
+            Xóa đã chọn
+        </button>
+        <button class="om-bulk-bar__btn om-bulk-bar__btn--ghost" onclick="clearSelection()">
+            Bỏ chọn
+        </button>
+    </div>
+
+    <!-- ═══ Table ═══ -->
+    <table class="om-table">
+        <thead>
+            <tr>
+                <th style="width:36px">
+                    <input type="checkbox" class="om-checkbox" id="check-all" onclick="toggleCheckAll(this)" title="Chọn tất cả">
+                </th>
+                <th style="width:40px">#</th>
+                <th>Họ tên</th>
+                <th>SĐT</th>
+                <th>Xe</th>
+                <th>Ngày tạo</th>
+                <th>Ngày hẹn</th>
+                <th>Hạn cọc</th>
+                <th>Tiền cọc</th>
+                <th>Tình trạng cọc</th>
+                <th style="width:140px">Trạng thái</th>
+                <th style="width:60px"></th>
+            </tr>
+        </thead>
+        <tbody id="order-table"></tbody>
+    </table>
+</div>
+
+<!-- ═══════ DEPOSIT MODAL (chỉ nhập tiền cọc, hạn cọc tự động = ngày hẹn) ═══════ -->
+<div class="om-modal-overlay" id="depositModal">
+    <div class="om-modal">
+        <h3 class="om-modal__title">Xác nhận <span>đặt cọc</span></h3>
+
+        <!-- Thông tin xe -->
+        <div class="om-modal__car-info" id="deposit-car-info"></div>
+
+        <!-- Trường: Số tiền cọc -->
+        <div class="om-modal__field">
+            <label class="om-modal__label">Số tiền đặt cọc (VNĐ)</label>
+            <input type="number" class="om-modal__input" id="deposit-amount-input" placeholder="Nhập số tiền cọc..." min="0">
+            <p class="om-modal__hint" id="deposit-amount-hint">Gợi ý: 10% giá xe</p>
+            <p class="om-modal__error" id="deposit-amount-error">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                <span></span>
+            </p>
+        </div>
+
+        <!-- Thông báo hạn cọc tự động -->
+        <div class="om-modal__field" style="background:#0d1f0d;border:1px solid #1a3a1a;border-radius:8px;padding:10px 14px;">
+            <p class="om-modal__hint" id="deposit-expire-hint" style="margin:0;font-size:13px;">📅 Hạn cọc sẽ được tự động lấy từ ngày hẹn xem xe</p>
+        </div>
+
+        <div class="om-modal__actions">
+            <button class="om-modal__btn om-modal__btn--ghost" onclick="closeDepositModal()">Hủy bỏ</button>
+            <button class="om-modal__btn om-modal__btn--primary" onclick="confirmDeposit()">Xác nhận cọc</button>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ CONFIRM MODAL (thay thế confirm() native) ═══════ -->
+<div class="om-modal-overlay" id="confirmModal">
+    <div class="om-modal">
+        <h3 class="om-modal__title" id="confirm-title">Xác nhận</h3>
+        <p class="om-confirm__text" id="confirm-message"></p>
+        <div class="om-modal__actions">
+            <button class="om-modal__btn om-modal__btn--ghost" id="confirm-cancel-btn">Hủy bỏ</button>
+            <button class="om-modal__btn om-modal__btn--primary" id="confirm-ok-btn">Xác nhận</button>
+        </div>
+    </div>
+</div>
+
+<script src="./javascript/orderMana.js"></script>
+

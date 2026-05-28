@@ -1,0 +1,221 @@
+/* Premium Dark Theme for Payment */
+body {
+    background-color: #121212;
+    color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.payment-container {
+    max-width: 1000px;
+    margin: 80px auto 40px;
+    padding: 0 20px;
+}
+
+.payment-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .payment-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+section {
+    background: #1e1e1e;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    overflow: visible;
+    height: auto;
+    min-height: unset;
+}
+
+.order-summary {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+h2, h3 {
+    margin-top: 0;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+/* Order Summary */
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px dashed #333;
+}
+
+.order-row:last-child {
+    border-bottom: none;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: #e02424;
+    padding-top: 20px;
+}
+
+/* Payment Methods */
+.method-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.method-card {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #2a2a2a;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.method-card input[type="radio"] {
+    display: none;
+}
+
+.method-card:hover {
+    background: #333;
+}
+
+.method-card:has(input:checked) {
+    border-color: #e02424;
+    background: rgba(224, 36, 36, 0.05);
+}
+
+.method-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* MoMo icon placeholder */
+.momo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ae2d9f, #d82d8b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1em;
+    color: #fff;
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+.btn-pay {
+    width: 100%;
+    padding: 15px;
+    background: #e02424;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-pay:hover {
+    background: #c01e1e;
+}
+
+.btn-pay:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+/* Status & QR */
+.hidden {
+    display: none !important;
+}
+
+.status-box {
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.status-box.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.5);
+}
+
+.status-box.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.5);
+}
+
+.status-box.expired {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.5);
+}
+
+.qr-container {
+    text-align: center;
+}
+
+.qr-image {
+    max-width: 250px;
+    width: 100%;
+    border-radius: 10px;
+    border: 3px solid #fff;
+    margin: 10px 0 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.transfer-info {
+    background: #252525;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    border-left: 4px solid #e02424;
+}
+
+.transfer-info p {
+    margin: 10px 0;
+}
+
+.highlight-note {
+    background: #111;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 1.2em;
+    color: #4CAF50;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.highlight-note:active {
+    background: #333;
+}

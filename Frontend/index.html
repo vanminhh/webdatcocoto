@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="N18-AUTO — Showroom ô tô Toyota chính hãng. Tìm kiếm và đặt mua xe hơi với giá tốt nhất cùng nhiều ưu đãi hấp dẫn.">
+    <title>N18-AUTO | Showroom Ô Tô Cao Cấp</title>
+    <link rel="icon" href="/image/LogoWeb.png">
+
+    <!-- Google Fonts: Montserrat (Toyota-style) + Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/themify-icons/themify-icons.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/stylecss/style.css">
+    <link rel="stylesheet" href="/stylecss/responsive.css">
+
+    <!-- Scripts -->
+    <script src="/javascript/promotions.js"></script>
+    <script src="/javascript/main.js"></script>
+    <script src="/javascript/login.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+    <!-- ═══════════ HEADER (Fixed) ═══════════ -->
+    <header class="header" id="main-header">
+        <div class="header__logo">
+            <a href="index.html" aria-label="Trang chủ N18-AUTO">
+                <img src="/image/LogoWeb.png" alt="N18-AUTO Logo" width="100" height="100">
+            </a>
+        </div>
+
+        <div class="header__search">
+            <label for="searchInput" class="sr-only">Tìm kiếm xe</label>
+            <i class="fa fa-search header__search-icon"></i>
+            <input id="searchInput" type="text" placeholder="Tìm kiếm dòng xe bạn yêu thích..." autocomplete="off">
+        </div>
+
+        <nav class="header__nav" aria-label="Main navigation">
+            <a href="manager.html" class="header__nav-link header__nav-link--admin" style="display: none;">
+                <i class="fa fa-print"></i>
+                <span>Admin</span>
+            </a>
+            <a id="my-orders-link" href="orders.html" class="header__nav-link" style="display: none;">
+                <i class="fa fa-list-alt"></i>
+                <span>Đơn của tôi</span>
+            </a>
+            <a id="profile-link" href="profile.html" class="header__nav-link" style="display: none;">
+                <i class="fa fa-id-card"></i>
+                <span>Hồ sơ</span>
+            </a>
+            <a id="login-btn" href="login.html" class="header__nav-link">
+                <i class="fa fa-user"></i>
+                <span id="login-text">Login</span>
+            </a>
+            <a href="aboutus.html" class="header__nav-link">
+                <i class="fa fa-question-circle"></i>
+                <span>About Us</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- ═══════════ HERO BANNER — Full Width ═══════════ -->
+    <section class="hero" id="hero-banner" aria-label="Banner quảng cáo">
+        <div class="hero__slides" id="hero-slides">
+            <!-- Slides được render bởi JS từ heroBanners[] -->
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button class="hero__arrow hero__arrow--prev" id="hero-prev" aria-label="Slide trước">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button class="hero__arrow hero__arrow--next" id="hero-next" aria-label="Slide tiếp">
+            <i class="fa fa-chevron-right"></i>
+        </button>
+
+        <!-- Dot indicators -->
+        <div class="hero__dots" id="hero-dots"></div>
+    </section>
+
+    <!-- ═══════════ PROMO TICKER — Auto-scroll ═══════════ -->
+    <section class="promo-ticker" id="promo-ticker" aria-label="Khuyến mãi nổi bật">
+        <div class="promo-ticker__label">
+            <i class="fa fa-fire"></i>
+            <span>KHUYẾN MÃI</span>
+        </div>
+        <div class="promo-ticker__track-wrapper">
+            <div class="promo-ticker__track" id="promo-ticker-track">
+                <!-- Cards được render bởi JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PAGE WRAPPER (Sidebar + Content) ═══════════ -->
+    <div class="page-wrapper">
+
+        <!-- ═══════════ SIDEBAR FILTER ═══════════ -->
+        <aside class="sidebar" aria-label="Bộ lọc xe">
+            <div class="sidebar__title">
+                <i class="fa fa-sliders-h"></i>
+                <span>Bộ Lọc</span>
+            </div>
+
+            <!-- Filter: Price -->
+            <div class="filter-group">
+                <h2 class="filter-group__header" onclick="toggleFilter(this)">
+                    <span><i class="fa fa-tag"></i> Khoảng Giá</span>
+                    <i class="fa fa-chevron-down filter-group__arrow"></i>
+                </h2>
+                <div class="filter-group__options">
+                    <button class="filter-option" onclick="selectOption(this); updatePriceFilter(400000000,600000000)">
+                        <span>400M — 600M</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updatePriceFilter(600000000,800000000)">
+                        <span>600M — 800M</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updatePriceFilter(800000000,1000000000)">
+                        <span>800M — 1 Tỷ</span>
+                    </button>
+                    <button class="filter-option"
+                        onclick="selectOption(this); updatePriceFilter(1000000000,99999999999)">
+                        <span>Trên 1 Tỷ</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updatePriceFilter(0,99999999999)">
+                        <span>Tất cả</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter: Type -->
+            <div class="filter-group">
+                <h2 class="filter-group__header" onclick="toggleFilter(this)">
+                    <span><i class="fa fa-car"></i> Loại Xe</span>
+                    <i class="fa fa-chevron-down filter-group__arrow"></i>
+                </h2>
+                <div class="filter-group__options">
+                    <button class="filter-option" onclick="selectOption(this); updateTypeFilter('Sedan')">
+                        <span>Sedan</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updateTypeFilter('SUV')">
+                        <span>SUV</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updateTypeFilter('Service Car')">
+                        <span>Service Car</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updateTypeFilter('Truck')">
+                        <span>Pickup Truck</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updateTypeFilter('all')">
+                        <span>Tất cả</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter: Fuel -->
+            <div class="filter-group">
+                <h2 class="filter-group__header" onclick="toggleFilter(this)">
+                    <span><i class="fa fa-gas-pump"></i> Nhiên Liệu</span>
+                    <i class="fa fa-chevron-down filter-group__arrow"></i>
+                </h2>
+                <div class="filter-group__options">
+                    <button class="filter-option" onclick="selectOption(this); updateFuelFilter('Gas')">
+                        <span>Xăng</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); updateFuelFilter('OIL')">
+                        <span>Dầu</span>
+                    </button>
+                    <button class="filter-option" onclick="selectOption(this); filterCarsByFuel('all')">
+                        <span>Tất cả</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══════════ MAIN CONTENT ═══════════ -->
+        <main class="main-content">
+
+            <!-- Promo Section: Khuyến mãi đặc biệt -->
+            <section class="promo-section" id="promo-section" aria-label="Khuyến mãi đặc biệt">
+                <div class="promo-section__header">
+                    <h2 class="promo-section__title">
+                        <span class="promo-section__fire">🔥</span>
+                        KHUYẾN MÃI ĐẶC BIỆT THÁNG NÀY
+                    </h2>
+                    <p class="promo-section__subtitle">Cơ hội vàng sở hữu xe Toyota với mức giá không tưởng</p>
+                </div>
+                <div class="promo-section__grid" id="promo-section-grid">
+                    <!-- Promo cards rendered by JS -->
+                </div>
+            </section>
+
+            <!-- Car Listing -->
+            <section class="main-content__header">
+                <h2 class="main-content__title">Khám Phá Dòng Xe</h2>
+                <p class="main-content__subtitle">Bộ sưu tập xe Toyota chính hãng đầy đủ nhất</p>
+            </section>
+
+            <section class="car-grid" id="car-list" aria-label="Danh sách xe">
+                <!-- Car cards rendered by JS -->
+            </section>
+        </main>
+
+        <!-- ═══════════ FOOTER ═══════════ -->
+        <footer class="footer">
+            <div class="footer__brand">
+                <img src="/image/LogoWeb.png" alt="N18-AUTO" class="footer__logo" width="60" height="60">
+                <p class="footer__tagline">Luxury Automotive Experience</p>
+            </div>
+            <div class="footer__socials">
+                <a href="https://www.facebook.com/minhvuog.dev/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook"><i class="ti-facebook"></i></a>
+                <a href="https://www.instagram.com/_minhvuog.dzai/" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram"><i class="ti-instagram"></i></a>
+                <a href="https://www.youtube.com/@MinhV%C6%B0%C6%A1ngD%C6%B0%C6%A1ng-v8e" target="_blank"
+                    rel="noopener noreferrer" aria-label="YouTube"><i class="ti-youtube"></i></a>
+                <a href="https://github.com/minhvuogdzz" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub"><i class="ti-github"></i></a>
+            </div>
+            <p class="footer__copyright">
+                &copy; 2026 N18-AUTO — Developed by
+                <a href="#">Văn Nhật Minh</a> &amp;
+                <a href="#">Trần Tuấn Quỳnh</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- ═══════════ CHATBOT FAB ═══════════ -->
+    <div class="chatbot-fab">
+        <button class="chatbot-fab__btn" onclick="loadPage('chatbot.html')" aria-label="Mở chatbot hỗ trợ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 1024 1024">
+                <path
+                    d="M738.3 287.6H285.7c-59 0-106.8 47.8-106.8 106.8v303.1c0 59 47.8 106.8 106.8 106.8h81.5v111.1c0 .7.8 1.1 1.4.7l166.9-110.6 41.8-.8h117.4l43.6-.4c59 0 106.8-47.8 106.8-106.8V394.5c0-59-47.8-106.9-106.8-106.9zM351.7 448.2c0-29.5 23.9-53.5 53.5-53.5s53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5-53.5-23.9-53.5-53.5zm157.9 267.1c-67.8 0-123.8-47.5-132.3-109h264.6c-8.6 61.5-64.5 109-132.3 109zm110-213.7c-29.5 0-53.5-23.9-53.5-53.5s23.9-53.5 53.5-53.5 53.5 23.9 53.5 53.5-23.9 53.5-53.5 53.5zM867.2 644.5V453.1h26.5c19.4 0 35.1 15.7 35.1 35.1v121.1c0 19.4-15.7 35.1-35.1 35.1h-26.5zM95.2 609.4V488.2c0-19.4 15.7-35.1 35.1-35.1h26.5v191.3h-26.5c-19.4 0-35.1-15.7-35.1-35.1zM561.5 149.6c0 23.4-15.6 43.3-36.9 49.7v44.9h-30v-44.9c-21.4-6.5-36.9-26.3-36.9-49.7 0-28.6 23.3-51.9 51.9-51.9s51.9 23.3 51.9 51.9z">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // ─── Search input handler ───
+        document.getElementById("searchInput").addEventListener("input", function (event) {
+            updateNameFilter(event.target.value);
+        });
+
+        // ─── Init khi DOM ready ───
+        document.addEventListener('DOMContentLoaded', function () {
+            FetchAllCars();
+            initHeroBanner();
+            initPromoTicker();
+            initPromoSection();
+        });
+
+        // ─── Redirect đến trang chi tiết xe ───
+        function delayedRedirect(carId) {
+            setTimeout(() => {
+                window.location.href = `detailCar.html?id=${carId}`;
+            }, 500);
+        }
+
+        // ─── Auth check ───
+        document.addEventListener("DOMContentLoaded", function () {
+            const token = localStorage.getItem("token");
+            const avatar = localStorage.getItem("avatar") || "/image/default-avatar.png";
+            const name = localStorage.getItem("name");
+            const email = localStorage.getItem("email");
+            const loginBtn = document.getElementById("login-btn");
+
+            if (token) {
+                loginBtn.innerHTML = `<img src="${avatar}" alt="Avatar" class="avatar"> <span>${name || email}</span>`;
+                loginBtn.href = "#";
+            } else {
+                loginBtn.innerHTML = `<i class="fa fa-user"></i> <span id="login-text">Login</span>`;
+                loginBtn.href = "login.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

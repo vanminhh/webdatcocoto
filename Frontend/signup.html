@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="/globals/globals1.css"/>
+  <link rel="stylesheet" href="/guide/styleguide2.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <title>Đăng ký - N18 AUTO</title>
+  <link rel="icon" href="/image/LogoWeb.png">
+  <style>
+    body {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      min-height: 100vh;
+      background-image: url(/image/back.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+    }
+
+    .sign-up {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .sign-up .frame {
+      position: relative;
+      width: 600px;
+      max-width: 95vw;
+      background-color: #22222233;
+      border-radius: 58px;
+      border: 2px solid #9b9a9a;
+      padding: 30px 50px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .sign-up .hello-welcome-back {
+      width: 100%;
+      text-shadow: 0px 4px 4px #00000040;
+      -webkit-text-stroke: 1px #000000;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 800;
+      color: #dddddd;
+      font-size: 42px;
+      text-align: center;
+      letter-spacing: 0;
+      line-height: 52px;
+      margin-bottom: 24px;
+    }
+
+    /* Form layout */
+    #signupForm {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form-fields {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Full-width fields span both columns */
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-field .label {
+      font-family: "Inter", Helvetica;
+      font-weight: 700;
+      color: #cccccc;
+      font-size: 14px;
+      letter-spacing: 0;
+      line-height: 20px;
+      margin: 0;
+    }
+
+    .form-field .label .span {
+      color: #cccccc;
+    }
+
+    .form-field input {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 14px;
+      background-color: var(--color-background-default-default);
+      border-radius: 20px;
+      border: 1px solid var(--color-border-default-default);
+      font-family: var(--single-line-body-base-font-family);
+      font-size: 14px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .form-field input:focus {
+      border-color: #e02424;
+    }
+
+    .form-field input::placeholder {
+      color: #999;
+    }
+
+    /* Buttons */
+    .form-actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sign-up .button-2 {
+      all: unset;
+      box-sizing: border-box;
+      display: flex;
+      width: 100%;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      background-color: #4b4b4a;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid transparent;
+      color: #ffffff;
+      font-size: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .sign-up .button-2:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .sign-up .text-wrapper-3 {
+      font-family: "Inter", Helvetica;
+      font-weight: 500;
+      color: #ffffff;
+      font-size: 16px;
+      letter-spacing: 0;
+      line-height: 23px;
+      white-space: nowrap;
+    }
+
+    .sign-up .button-3 {
+      all: unset;
+      box-sizing: border-box;
+      display: flex;
+      width: 100%;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      background-color: #f0f0f0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid transparent;
+      font-size: 18px;
+      color: #000000;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .sign-up .button-3:hover {
+      background-color: #3d3d3d;
+      color: #ffffff;
+    }
+
+    /* Logo */
+    @keyframes flickerGlow {
+      0% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
+      50% { filter: drop-shadow(0px 0px 20px rgb(168, 0, 0)); }
+      100% { filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5)); }
+    }
+
+    .sign-up .logoweb {
+      position: absolute;
+      width: 170px;
+      height: 160px;
+      top: 0;
+      left: 22px;
+      object-fit: cover;
+      animation: flickerGlow 1s infinite alternate;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .sign-up .frame {
+        padding: 24px 20px 30px;
+        border-radius: 30px;
+      }
+
+      .sign-up .hello-welcome-back {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .form-fields {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script src="/javascript/signup.js" defer></script>
+</head>
+<body>
+  <div class="sign-up">
+    <div class="frame">
+      <div class="hello-welcome-back">Hello !<br />Welcome Back</div>
+      <form id="signupForm">
+        <div class="form-fields">
+          <!-- Row 1: Họ và tên + Số điện thoại -->
+          <div class="form-field">
+            <p class="label"><span class="span">Họ và tên </span></p>
+            <input id="username" placeholder="Họ và tên" type="text" required />
+          </div>
+          <div class="form-field">
+            <p class="label"><span class="span">Số điện thoại </span></p>
+            <input id="phone" placeholder="0901 234 567" type="tel"
+              pattern="[0-9]{9,11}" title="Số điện thoại hợp lệ 9-11 chữ số" required />
+          </div>
+
+          <!-- Row 2: Email + Địa chỉ -->
+          <div class="form-field">
+            <p class="label"><span class="span">Email </span></p>
+            <input id="email" placeholder="Your Email" type="email" required />
+          </div>
+          <div class="form-field">
+            <p class="label"><span class="span">Địa chỉ </span></p>
+            <input id="address" placeholder="Số nhà, đường, quận/huyện, tỉnh/thành" type="text" required />
+          </div>
+
+          <!-- Row 3: Password + Confirm Password -->
+          <div class="form-field">
+            <p class="label"><span class="span">Password </span></p>
+            <input id="password" type="password" placeholder="Password" required />
+          </div>
+          <div class="form-field">
+            <p class="label"><span class="span">Confirm Password </span></p>
+            <input id="confirmPassword" type="password" placeholder="Confirm Password" required />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="button-2">Register</button>
+          <div class="text-wrapper-3">or</div>
+          <a href="login.html" style="width:100%; text-decoration:none;">
+            <button type="button" class="button-3">Sign In</button>
+          </a>
+        </div>
+      </form>
+    </div>
+    <a href="index.html">
+      <img class="logoweb" src="/image/LogoWeb.png" />
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "67ea8a2a8729439d1422bf09"
+  },
+  "username": "admin",
+  "name": "Admin",
+  "email": "admin88@gmail.com",
+  "password": "$2b$10$s8rHvQDsoz8WsPCAF4L6J.Z52bSJHDkeLS/t5Sjd.k8RBIYKoZVma",
+  "avatar": "/image/admin.png",
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "67eb523ee6c0e888228f307a"
+  },
+  "email": "ougvn.it2@gmail.com",
+  "name": "Minh Vương Dương",
+  "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLVKpFD02xKiUg8tzqIRWiHxupPMULUrB6gfoPxCbtzP9993Lkx=s96-c",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67eb5d567aa02deb08e1241a"
+  },
+  "email": "dminhv204@gmail.com",
+  "name": "Vương Dương",
+  "avatar": "https://lh3.googleusercontent.com/a/ACg8ocIyD9lx3KT-D4TMDzQHLQPYXUa_K3OPug2hdQtQbpgDCXoc_YY=s96-c",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67eb6899d58943dd79a1dd2f"
+  },
+  "email": "22022156@vnu.edu.vn",
+  "name": "22022156 Dương Minh Vương",
+  "avatar": "https://lh3.googleusercontent.com/a/ACg8ocJRLHzVk94i0HwaopVCtl_8bmNuswtfAc-Yz_5srsD0n9Q9R1w=s96-c",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67eb6c823b71386a7be0edb1"
+  },
+  "email": "user@gmail.com",
+  "password": "$2b$10$mywC6fvq/lQq5BgILNl0qONMdhBEb4TgJo5hctu9WfKtLm5qK.5Mi",
+  "name": "user04052004",
+  "avatar": "/image/default-avatar.png",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67eb861931e75aaf7d5f3d29"
+  },
+  "email": "u1@gmail.com",
+  "password": "$2b$10$9womMcs5OZFYyKrBg3vpcuSXeLejyUNHxRiyY0H0NBDceNJVdf5ri",
+  "name": "user",
+  "avatar": "/image/default-avatar.png",
+  "role": "user",
+  "__v": 0
+}]

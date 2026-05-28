@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu đơn hàng — N18-AUTO</title>
+    <link rel="icon" href="/image/LogoWeb.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .track-header {
+            background: linear-gradient(135deg, #1a1a1a, #111);
+            border-bottom: 2px solid #EB0A1E;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .track-header img { width: 50px; height: 50px; }
+        .track-header h1 { font-size: 20px; font-weight: 700; }
+        .track-header a {
+            margin-left: auto;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .track-header a:hover { color: #EB0A1E; }
+
+        .track-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .search-box {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        .search-box h2 { font-size: 22px; margin-bottom: 8px; }
+        .search-box p { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .search-box__row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .search-box input {
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            padding: 12px 16px;
+            width: 300px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus { border-color: #EB0A1E; }
+        .search-box button {
+            background: #EB0A1E;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-box button:hover { background: #c70818; }
+
+        .results { margin-top: 30px; }
+        .results__empty {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-size: 15px;
+        }
+
+        .order-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .order-card:hover { border-color: #444; }
+        .order-card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .order-card__id {
+            font-family: monospace;
+            font-size: 13px;
+            color: #888;
+        }
+        .order-card__badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge--cho_xac_nhan { background: rgba(245,158,11,0.15); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3); }
+        .badge--da_coc { background: rgba(59,130,246,0.15); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3); }
+        .badge--da_mua { background: rgba(34,197,94,0.15); color: #22C55E; border: 1px solid rgba(34,197,94,0.3); }
+        .badge--huy { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
+
+        .order-card__body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .order-card__field { font-size: 14px; }
+        .order-card__field span { color: #888; }
+        .order-card__field strong { color: #ddd; }
+        .order-card__deposit { color: #EB0A1E !important; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="track-header">
+        <img src="/image/LogoWeb.png" alt="N18-AUTO">
+        <h1>Tra Cứu Đơn Hàng</h1>
+        <a href="index.html"><i class="fa fa-arrow-left"></i> Về trang chủ</a>
+    </div>
+
+    <div class="track-container">
+        <div class="search-box">
+            <h2>🔍 Tra cứu đơn hàng</h2>
+            <p>Nhập số điện thoại để xem trạng thái đơn đặt cọc</p>
+            <div class="search-box__row">
+                <input type="text" id="trackPhone" placeholder="Nhập số điện thoại..." maxlength="12">
+                <button onclick="trackOrder()"><i class="fa fa-search"></i> Tìm kiếm</button>
+            </div>
+        </div>
+
+        <div class="results" id="trackResults">
+            <!-- Kết quả sẽ render ở đây -->
+        </div>
+    </div>
+
+    <script>
+        const statusLabels = {
+            'cho_xac_nhan': 'Chờ xác nhận',
+            'da_coc': 'Đã cọc',
+            'da_mua': 'Đã mua',
+            'huy': 'Hủy'
+        };
+
+        async function trackOrder() {
+            const phone = document.getElementById('trackPhone').value.trim();
+            if (!phone) { alert('Vui lòng nhập số điện thoại!'); return; }
+
+            const resultsDiv = document.getElementById('trackResults');
+            resultsDiv.innerHTML = '<div class="results__empty">Đang tìm kiếm...</div>';
+
+            try {
+                // Fetch orders + cars
+                const [ordersRes, carsRes] = await Promise.all([
+                    fetch(`/order/track/${encodeURIComponent(phone)}`),
+                    fetch('/api/cars')
+                ]);
+
+                const orders = await ordersRes.json();
+                const cars = await carsRes.json();
+                const carMap = {};
+                cars.forEach(c => { carMap[String(c.id)] = c.name; });
+
+                if (!orders.length) {
+                    resultsDiv.innerHTML = '<div class="results__empty">Không tìm thấy đơn hàng nào với số điện thoại này.</div>';
+                    return;
+                }
+
+                resultsDiv.innerHTML = orders.map(o => {
+                    const status = o.status || 'cho_xac_nhan';
+                    const carName = carMap[String(o.carId)] || `Xe #${o.carId}`;
+                    const deposit = o.depositAmount || 0;
+                    const deadline = o.deadline ? new Date(o.deadline).toLocaleDateString('vi-VN') : '—';
+                    const created = o.createdAt ? new Date(o.createdAt).toLocaleDateString('vi-VN') : '—';
+
+                    return `
+                        <div class="order-card">
+                            <div class="order-card__header">
+                                <span class="order-card__id">🆔 ${o._id}</span>
+                                <span class="order-card__badge badge--${status}">${statusLabels[status] || status}</span>
+                            </div>
+                            <div class="order-card__body">
+                                <div class="order-card__field"><span>Xe: </span><strong>${carName}</strong></div>
+                                <div class="order-card__field"><span>Ngày tạo: </span><strong>${created}</strong></div>
+                                <div class="order-card__field"><span>Ngày hẹn: </span><strong>${o.date ? new Date(o.date).toLocaleDateString('vi-VN') : '—'}</strong></div>
+                                <div class="order-card__field"><span>Deadline: </span><strong>${deadline}</strong></div>
+                                <div class="order-card__field"><span>Đại lý: </span><strong>${o.dealer || '—'}</strong></div>
+                                <div class="order-card__field"><span>Tiền cọc: </span><strong class="order-card__deposit">${deposit > 0 ? new Intl.NumberFormat('vi-VN', {style:'currency',currency:'VND'}).format(deposit) : '—'}</strong></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (e) {
+                resultsDiv.innerHTML = '<div class="results__empty">Lỗi kết nối. Vui lòng thử lại.</div>';
+            }
+        }
+
+        // Enter key
+        document.getElementById('trackPhone').addEventListener('keyup', e => {
+            if (e.key === 'Enter') trackOrder();
+        });
+    </script>
+</body>
+</html>

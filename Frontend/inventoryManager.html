@@ -1,0 +1,230 @@
+<!-- ═══════════════════════════════════════════════════════
+     QUẢN LÝ TỒN KHO — N18-AUTO Admin
+     Dark theme đen | Be Vietnam Pro | SVG icons only
+     ═══════════════════════════════════════════════════════ -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ── Page scope ── */
+.om { font-family: 'Be Vietnam Pro', sans-serif; }
+
+/* ── Header ── */
+.om-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px;
+}
+.om-header__title {
+    font-size: 26px; font-weight: 800; color: #eee; margin: 0;
+}
+.om-header__title span { color: #C8102E; }
+
+/* ── Toolbar ── */
+.om-toolbar {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.om-toolbar__input {
+    background: #181818; border: 1px solid rgba(255,255,255,0.1);
+    color: #ccc; padding: 9px 14px; border-radius: 8px;
+    font-size: 13px; font-family: 'Be Vietnam Pro', sans-serif;
+    outline: none;
+}
+.om-toolbar__input:focus { border-color: #C8102E; }
+.om-toolbar__input::placeholder { color: #555; }
+
+.om-toolbar__btn-add {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #C8102E; color: #fff; border: none;
+    padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer; transition: all 0.2s; margin-left: auto;
+    text-decoration: none;
+}
+.om-toolbar__btn-add:hover { background: #9B0B22; color: #fff;}
+
+/* ── Table ── */
+.om-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    font-size: 13px;
+}
+.om-table thead th {
+    background: #181818; color: #666; font-weight: 600;
+    text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.5px;
+    padding: 12px 14px; border-bottom: 1px solid #222;
+    text-align: left; white-space: nowrap;
+}
+.om-table tbody tr {
+    border-bottom: 1px solid #1a1a1a;
+    transition: background 0.15s;
+}
+.om-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.om-table tbody td {
+    padding: 12px 14px; color: #bbb;
+    vertical-align: middle;
+}
+
+.om-table img { border-radius: 6px; border: 1px solid #333; }
+
+/* Badge trạng thái */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.badge.green { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); }
+.badge.yellow { background: rgba(250, 204, 21, 0.1); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.2); }
+.badge.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+/* ── Action button ── */
+.om-btn-action {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid #333; background: transparent; color: #aaa;
+    padding: 5px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 500;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+}
+.om-btn-action:hover { border-color: #C8102E; color: #C8102E; }
+.om-btn-action.large { padding: 8px 16px; font-size: 13px; }
+</style>
+
+<div class="om">
+    <!-- ═══ Header ═══ -->
+    <div class="om-header">
+        <h2 class="om-header__title">Quản lý <span>Tồn Kho</span></h2>
+    </div>
+
+    <!-- ═══ Toolbar ═══ -->
+    <div class="om-toolbar" style="justify-content: space-between;">
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="search-inventory" class="om-toolbar__input" style="width:240px" placeholder="Tìm kiếm mã xe, tên xe...">
+        </div>
+        
+        <button class="om-toolbar__btn-add" id="btn-import-stock" onclick="openImportPanel()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Nhập kho
+        </button>
+    </div>
+
+    <!-- ═══ IMPORT PANEL ═══ -->
+    <div class="admin-panel-overlay" id="inventory-import-panel">
+        <div class="admin-panel">
+            <div class="admin-panel__header">
+                <h3><i class="fa fa-box-open"></i> Nhập Hàng</h3>
+                <button class="admin-panel__close" onclick="closeAdminPanel('inventory-import-panel')">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-panel__body">
+                <div class="admin-panel__field">
+                    <label>Chọn xe <span style="color:#C8102E">*</span></label>
+                    <select id="import-car-select" onchange="updateImportSnapshot()"></select>
+                </div>
+                
+                <div id="import-current-stock-display" style="margin-bottom: 16px;"></div>
+
+                <div class="admin-panel__field">
+                    <label>Số lượng nhập <span style="color:#C8102E">*</span></label>
+                    <input type="number" id="import-quantity" min="1" value="1">
+                </div>
+                
+                <div class="admin-panel__field">
+                    <label>Lý do nhập kho</label>
+                    <textarea id="import-reason" placeholder="VD: Nhập lô hàng mới tháng 5" style="width:100%; padding:10px; background:#181818; border:1px solid rgba(255,255,255,0.1); color:#fff; border-radius:8px; font-family:inherit; min-height:80px; outline:none; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="admin-panel__footer">
+                <button class="btn-admin btn-admin--outline" onclick="closeAdminPanel('inventory-import-panel')">Hủy</button>
+                <button class="btn-admin btn-admin--primary" id="btn-submit-import" onclick="submitImportFromPanel()">Xác nhận Nhập</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Table ═══ -->
+    <table class="om-table">
+        <thead>
+            <tr>
+                <th style="width:36px">#</th>
+                <th>Mã xe</th>
+                <th>Tên xe</th>
+                <th>Hình ảnh</th>
+                <th>Trạng thái</th>
+                <th title="totalQuantity">Tổng</th>
+                <th title="physicalQuantity">Vật lý</th>
+                <th title="reservedQuantity">Giữ chỗ</th>
+                <th title="availableQuantity" style="color:#4ade80">Khả dụng</th>
+                <th title="soldQuantity" style="color:#3B82F6">Đã bán</th>
+                <th>Ngày nhập gần nhất</th>
+                <th style="width:90px">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="inventory-table"></tbody>
+    </table>
+
+    <!-- ═══ Transaction History Panel ═══ -->
+    <div id="inv-history-panel" style="display:none; margin-top:28px; background:#181818; border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:20px; overflow-x:auto;">
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; gap:12px; flex-wrap:wrap;">
+            <div>
+                <h3 style="margin:0; color:#eee; font-size:16px; font-weight:700;">
+                    Lịch sử giao dịch — <span id="inv-history-car-code" style="color:#C8102E;"></span><span id="inv-history-car-name" style="color:#888; font-weight:400;"></span>
+                </h3>
+                <p style="margin:4px 0 0; color:#555; font-size:12px;">Tổng: <span id="inv-tx-count" style="color:#aaa;">0</span> giao dịch</p>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <button onclick="openImportPanel(document.getElementById('inv-history-car-code').textContent)" style="display:inline-flex; align-items:center; gap:5px; background:rgba(74,222,128,0.12); border:1px solid rgba(74,222,128,0.3); color:#4ade80; padding:5px 12px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:12px; font-weight:600;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nhập nhanh
+                </button>
+                <button onclick="closeHistoryPanel()" style="background:transparent; border:1px solid #333; color:#aaa; padding:5px 12px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:12px;">✕ Đóng</button>
+            </div>
+        </div>
+
+        <!-- C7: Filter bar -->
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:14px; padding:10px 12px; background:rgba(255,255,255,0.03); border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
+            <span style="color:#666; font-size:12px; font-weight:600; white-space:nowrap;">Lọc:</span>
+            <select id="tx-filter-type" onchange="applyHistoryFilter()" style="background:#111; border:1px solid #333; color:#ccc; padding:5px 10px; border-radius:6px; font-size:12px; font-family:inherit; outline:none;">
+                <option value="">Tất cả loại GD</option>
+                <option value="IMPORT">Nhập kho</option>
+                <option value="RESERVE">Giữ chỗ</option>
+                <option value="RELEASE">Nhả hàng</option>
+                <option value="CONFIRM_DEPOSIT">Xác nhận cọc</option>
+                <option value="DELIVER">Giao xe</option>
+                <option value="ADJUSTMENT">Điều chỉnh</option>
+                <option value="MIGRATION">Di chuyển DL</option>
+            </select>
+            <input type="date" id="tx-filter-from" onchange="applyHistoryFilter()" style="background:#111; border:1px solid #333; color:#ccc; padding:5px 10px; border-radius:6px; font-size:12px; font-family:inherit; outline:none;">
+            <span style="color:#555; font-size:12px;">→</span>
+            <input type="date" id="tx-filter-to" onchange="applyHistoryFilter()" style="background:#111; border:1px solid #333; color:#ccc; padding:5px 10px; border-radius:6px; font-size:12px; font-family:inherit; outline:none;">
+            <button onclick="document.getElementById('tx-filter-type').value='';document.getElementById('tx-filter-from').value='';document.getElementById('tx-filter-to').value='';applyHistoryFilter();" style="background:transparent; border:1px solid #333; color:#666; padding:5px 10px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:12px;">Xóa lọc</button>
+        </div>
+
+        <!-- C6: Table chuẩn hóa 10 cột -->
+        <div style="overflow-x:auto;">
+        <table class="om-table" id="inv-tx-table" style="min-width:900px;">
+            <thead>
+                <tr>
+                    <th>Thời gian</th>
+                    <th>Loại GD</th>
+                    <th style="text-align:center">SL</th>
+                    <th>Tổng (trước→sau)</th>
+                    <th>Vật lý (trước→sau)</th>
+                    <th>Giữ chỗ (trước→sau)</th>
+                    <th>Khả dụng (trước→sau)</th>
+                    <th>Người tạo</th>
+                    <th>Đơn hàng</th>
+                    <th>Lý do</th>
+                </tr>
+            </thead>
+            <tbody id="inv-tx-body">
+                <tr><td colspan="10" style="text-align:center; color:#555;">Đang tải...</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,717 @@
+/* ════════════════════════════════════════════
+   RESPONSIVE — Luxury Automotive Theme
+   Hero Banner + Promo + Sidebar + Car Grid
+   ════════════════════════════════════════════ */
+
+/* ─── Large Tablets / Small Desktops (930–1200px) ─── */
+@media (min-width: 930px) and (max-width: 1200px) {
+    :root {
+        --sidebar-w: 240px;
+    }
+
+    .page-wrapper {
+        grid-template-columns: var(--sidebar-w) 1fr;
+    }
+
+    .sidebar {
+        width: var(--sidebar-w);
+        padding: 24px 16px;
+    }
+
+    .main-content {
+        padding: 28px 24px 60px;
+    }
+
+    .car-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+
+    .main-content__title {
+        font-size: 28px;
+    }
+
+    .header__search {
+        width: 300px;
+    }
+
+    /* Hero */
+    .hero {
+        height: 450px;
+    }
+
+    .hero__title {
+        font-size: 42px;
+    }
+
+    .hero__content {
+        padding: 0 60px;
+        max-width: 480px;
+    }
+
+    /* Promo Section */
+    .promo-section__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .promo-section__title {
+        font-size: 22px;
+    }
+}
+
+/* ─── Tablets (680–929px) ─── */
+@media (min-width: 680px) and (max-width: 929px) {
+    .page-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "sidebar"
+            "content"
+            "footer";
+    }
+
+    /* Header */
+    .header {
+        padding: 0 20px;
+    }
+
+    .header__search {
+        width: 260px;
+        padding: 8px 18px;
+    }
+
+    .header__nav-link span {
+        display: none;
+    }
+
+    .header__nav-link {
+        padding: 10px 12px;
+    }
+
+    /* Hero */
+    .hero {
+        height: 400px;
+    }
+
+    .hero__title {
+        font-size: 36px;
+    }
+
+    .hero__description {
+        font-size: 14px;
+    }
+
+    .hero__content {
+        padding: 0 40px;
+        max-width: 420px;
+    }
+
+    .hero__image {
+        width: 55%;
+        height: 75%;
+    }
+
+    .hero__cta {
+        padding: 12px 24px;
+        font-size: 12px;
+    }
+
+    .hero__arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    /* Promo Ticker */
+    .promo-ticker {
+        height: 90px;
+    }
+
+    .promo-ticker__label {
+        padding: 0 16px;
+        font-size: 10px;
+    }
+
+    .ticker-card {
+        min-width: 280px;
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    .ticker-card__image {
+        width: 80px;
+        height: 55px;
+    }
+
+    /* Sidebar → Horizontal */
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: auto;
+        overflow: visible;
+        padding: 20px 24px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-sidebar);
+    }
+
+    .sidebar__title {
+        display: none;
+    }
+
+    .filter-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .filter-group__header {
+        font-size: 12px;
+        padding: 10px 12px;
+        text-align: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .filter-group__options.visible {
+        max-height: 300px;
+    }
+
+    /* Content */
+    .main-content {
+        padding: 28px 24px 60px;
+    }
+
+    .main-content__title {
+        font-size: 28px;
+    }
+
+    .car-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    /* Promo Section */
+    .promo-section__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .promo-section__title {
+        font-size: 20px;
+    }
+}
+
+/* ─── Large Phones (540–679px) ─── */
+@media (min-width: 540px) and (max-width: 679px) {
+    .page-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "sidebar"
+            "content"
+            "footer";
+    }
+
+    /* Header */
+    .header {
+        padding: 0 16px;
+    }
+
+    .header__search {
+        width: 200px;
+        padding: 8px 14px;
+    }
+
+    .header__search input {
+        font-size: 13px;
+    }
+
+    .header__nav-link span {
+        display: none;
+    }
+
+    .header__nav-link {
+        padding: 10px;
+    }
+
+    /* Hero */
+    .hero {
+        height: 360px;
+    }
+
+    .hero__title {
+        font-size: 30px;
+    }
+
+    .hero__subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .hero__description {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .hero__content {
+        padding: 0 28px;
+        max-width: 350px;
+    }
+
+    .hero__image {
+        width: 50%;
+        height: 70%;
+        opacity: 0.6;
+    }
+
+    .hero__cta {
+        padding: 10px 20px;
+        font-size: 11px;
+    }
+
+    .hero__cta-group {
+        gap: 10px;
+    }
+
+    .hero__arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 13px;
+    }
+
+    .hero__arrow--prev {
+        left: 12px;
+    }
+
+    .hero__arrow--next {
+        right: 12px;
+    }
+
+    /* Promo Ticker */
+    .promo-ticker {
+        height: 80px;
+    }
+
+    .promo-ticker__label {
+        padding: 0 12px;
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .ticker-card {
+        min-width: 260px;
+        padding: 8px 14px;
+    }
+
+    .ticker-card__image {
+        width: 70px;
+        height: 45px;
+    }
+
+    .ticker-card__name {
+        font-size: 12px;
+    }
+
+    .ticker-card__sale-price {
+        font-size: 12px;
+    }
+
+    /* Sidebar → Horizontal */
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: auto;
+        overflow: visible;
+        padding: 16px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-sidebar);
+    }
+
+    .sidebar__title {
+        display: none;
+    }
+
+    .filter-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .filter-group__header {
+        font-size: 11px;
+        padding: 8px 10px;
+        justify-content: center;
+    }
+
+    .filter-group__header span i {
+        display: none;
+    }
+
+    /* Content */
+    .main-content {
+        padding: 24px 16px 60px;
+    }
+
+    .main-content__title {
+        font-size: 24px;
+    }
+
+    .main-content__subtitle {
+        font-size: 13px;
+    }
+
+    .car-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    /* Promo Section */
+    .promo-section__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .promo-section__title {
+        font-size: 18px;
+    }
+}
+
+/* ─── Small Phones (≤539px) ─── */
+@media (max-width: 539px) {
+    :root {
+        --header-h: 70px;
+    }
+
+    .page-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "sidebar"
+            "content"
+            "footer";
+    }
+
+    /* Header */
+    .header {
+        padding: 0 12px;
+        height: var(--header-h);
+    }
+
+    .header__logo img {
+        height: 45px;
+    }
+
+    .header__search {
+        width: 140px;
+        padding: 6px 12px;
+        gap: 8px;
+    }
+
+    .header__search input {
+        font-size: 12px;
+    }
+
+    .header__nav-link span {
+        display: none;
+    }
+
+    .header__nav-link {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .header__nav-link i {
+        font-size: 14px;
+    }
+
+    /* Hero */
+    .hero {
+        height: 300px;
+    }
+
+    .hero__title {
+        font-size: 24px;
+    }
+
+    .hero__subtitle {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+    }
+
+    .hero__description {
+        font-size: 12px;
+        margin-bottom: 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .hero__content {
+        padding: 0 20px;
+        max-width: 280px;
+    }
+
+    .hero__image {
+        width: 45%;
+        height: 65%;
+        opacity: 0.4;
+    }
+
+    .hero__cta {
+        padding: 8px 16px;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .hero__cta-group {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .hero__arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .hero__arrow--prev {
+        left: 8px;
+    }
+
+    .hero__arrow--next {
+        right: 8px;
+    }
+
+    .hero__dots {
+        bottom: 12px;
+        gap: 6px;
+    }
+
+    .hero__dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .hero__dot.active {
+        width: 22px;
+    }
+
+    /* Promo Ticker */
+    .promo-ticker {
+        height: 70px;
+    }
+
+    .promo-ticker__label {
+        padding: 0 10px;
+        font-size: 8px;
+        letter-spacing: 1px;
+        gap: 4px;
+    }
+
+    .promo-ticker__label i {
+        font-size: 12px;
+    }
+
+    .ticker-card {
+        min-width: 230px;
+        padding: 6px 10px;
+        gap: 8px;
+    }
+
+    .ticker-card__image {
+        width: 55px;
+        height: 40px;
+    }
+
+    .ticker-card__name {
+        font-size: 11px;
+    }
+
+    .ticker-card__badge {
+        font-size: 7px;
+        padding: 1px 5px;
+    }
+
+    .ticker-card__sale-price {
+        font-size: 11px;
+    }
+
+    .ticker-card__original-price {
+        font-size: 9px;
+    }
+
+    .ticker-card__countdown {
+        font-size: 8px;
+    }
+
+    /* Sidebar → Compact Horizontal */
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: auto;
+        overflow: visible;
+        padding: 12px;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-sidebar);
+    }
+
+    .sidebar__title {
+        display: none;
+    }
+
+    .filter-group {
+        flex: 1;
+        margin-bottom: 0;
+    }
+
+    .filter-group__header {
+        font-size: 10px;
+        padding: 8px 6px;
+        justify-content: center;
+        letter-spacing: 0;
+    }
+
+    .filter-group__header span i {
+        display: none;
+    }
+
+    .filter-group__arrow {
+        font-size: 10px;
+        margin-left: 4px;
+    }
+
+    .filter-option {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    /* Content */
+    .main-content {
+        padding: 20px 14px 40px;
+    }
+
+    .main-content__title {
+        font-size: 22px;
+    }
+
+    .main-content__subtitle {
+        font-size: 12px;
+    }
+
+    .car-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .car-card__image-wrapper {
+        height: 150px;
+    }
+
+    .car-card__body {
+        padding: 14px;
+    }
+
+    .car-card__name {
+        font-size: 15px;
+        letter-spacing: 0.5px;
+    }
+
+    .car-card__price {
+        font-size: 16px;
+    }
+
+    .car-card__specs {
+        font-size: 11px;
+    }
+
+    /* Promo Section */
+    .promo-section {
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+    }
+
+    .promo-section__title {
+        font-size: 16px;
+        gap: 8px;
+    }
+
+    .promo-section__fire {
+        font-size: 22px;
+    }
+
+    .promo-section__subtitle {
+        font-size: 12px;
+    }
+
+    .promo-section__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .promo-card__image-wrapper {
+        height: 160px;
+    }
+
+    .promo-card__name {
+        font-size: 17px;
+    }
+
+    .promo-card__sale-price {
+        font-size: 18px;
+    }
+
+    .promo-card__countdown-value {
+        font-size: 14px;
+    }
+
+    .promo-card__countdown-item {
+        padding: 4px 8px;
+        min-width: 40px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 32px 16px 24px;
+    }
+
+    .footer__socials {
+        gap: 12px;
+    }
+
+    .footer__socials a {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    /* Chatbot FAB */
+    .chatbot-fab {
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .chatbot-fab__btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .chatbot-fab__btn svg {
+        width: 24px;
+        height: 24px;
+    }
+}

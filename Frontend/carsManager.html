@@ -1,0 +1,208 @@
+<!-- ═══════════════════════════════════════════════════════
+     QUẢN LÝ Ô TÔ — N18-AUTO Admin
+     Dark theme đỏ-đen | Be Vietnam Pro | SVG icons only
+     ═══════════════════════════════════════════════════════ -->
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ── Page scope ── */
+.om { font-family: 'Be Vietnam Pro', sans-serif; }
+
+/* ── Header ── */
+.om-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px;
+}
+.om-header__title {
+    font-size: 26px; font-weight: 800; color: #eee; margin: 0;
+}
+.om-header__title span { color: #C8102E; }
+
+/* ── Toolbar ── */
+.om-toolbar {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.om-toolbar__input {
+    background: #181818; border: 1px solid rgba(255,255,255,0.1);
+    color: #ccc; padding: 9px 14px; border-radius: 8px;
+    font-size: 13px; font-family: 'Be Vietnam Pro', sans-serif;
+    outline: none;
+}
+.om-toolbar__input:focus { border-color: #C8102E; }
+.om-toolbar__input::placeholder { color: #555; }
+
+.om-toolbar__select {
+    background: #181818; border: 1px solid rgba(255,255,255,0.1);
+    color: #ccc; padding: 9px 14px; border-radius: 8px;
+    font-size: 13px; font-family: 'Be Vietnam Pro', sans-serif;
+    outline: none; cursor: pointer;
+    -webkit-appearance: none; -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 32px;
+}
+.om-toolbar__select:focus { border-color: #C8102E; }
+
+.om-toolbar__btn-add {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #C8102E; color: #fff; border: none;
+    padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer; transition: all 0.2s; margin-left: auto;
+}
+.om-toolbar__btn-add:hover { background: #9B0B22; }
+
+/* ── Table ── */
+.om-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    font-size: 13px;
+}
+.om-table thead th {
+    background: #181818; color: #666; font-weight: 600;
+    text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.5px;
+    padding: 12px 14px; border-bottom: 1px solid #222;
+    text-align: left; white-space: nowrap;
+}
+.om-table tbody tr {
+    border-bottom: 1px solid #1a1a1a;
+    transition: background 0.15s;
+}
+.om-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+.om-table tbody td {
+    padding: 12px 14px; color: #bbb;
+    vertical-align: middle;
+}
+
+/* Action buttons in table */
+.om-btn-action {
+    background: transparent; border: 1px solid transparent;
+    border-radius: 6px; padding: 5px; cursor: pointer;
+    transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
+}
+.om-btn-action.edit { color: #F5A623; background: rgba(245,166,35,0.1); border-color: rgba(245,166,35,0.2); }
+.om-btn-action.edit:hover { background: rgba(245,166,35,0.2); border-color: rgba(245,166,35,0.4); }
+.om-btn-action.delete { color: #DC3545; background: rgba(220,53,69,0.1); border-color: rgba(220,53,69,0.2); margin-left: 4px; }
+.om-btn-action.delete:hover { background: rgba(220,53,69,0.2); border-color: rgba(220,53,69,0.4); }
+
+.om-table img { border-radius: 6px; border: 1px solid #333; }
+.om-stock-input {
+    background: #181818; border: 1px solid #333; color: #fff;
+    width: 50px; text-align: center; border-radius: 4px; padding: 2px;
+    font-family: inherit; font-size: 13px; outline: none;
+}
+.om-stock-input:focus { border-color: #C8102E; }
+</style>
+
+<div class="om">
+    <!-- ═══ Header ═══ -->
+    <div class="om-header">
+        <h2 class="om-header__title">Quản lý <span>Ô tô</span></h2>
+    </div>
+
+    <!-- ═══ Toolbar ═══ -->
+    <div class="om-toolbar" style="justify-content: space-between;">
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="search-car" class="om-toolbar__input" style="width:240px" placeholder="Tìm kiếm xe...">
+        </div>
+        
+        <button class="om-toolbar__btn-add" id="btn-add-car" onclick="openCreateCarPanel()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Thêm xe
+        </button>
+    </div>
+
+    <!-- ═══ CREATE PANEL ═══ -->
+    <div class="admin-panel-overlay" id="car-create-panel">
+        <div class="admin-panel" style="width: 550px;">
+            <div class="admin-panel__header">
+                <h3><i class="fa fa-car"></i> Thêm Xe Mới</h3>
+                <button class="admin-panel__close" onclick="closeAdminPanel('car-create-panel')">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <div class="admin-panel__body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Tên xe <span style="color:#C8102E">*</span></label>
+                        <input type="text" id="create-car-name" placeholder="VD: Toyota Camry">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Mã xe <span style="color:#C8102E">*</span></label>
+                        <input type="text" id="create-car-id" placeholder="VD: CAMRY-2023">
+                    </div>
+                </div>
+                
+                <div class="admin-panel__field">
+                    <label>URL Hình ảnh</label>
+                    <input type="text" id="create-car-url" placeholder="https://...">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Nhiên liệu</label>
+                        <select id="create-car-fuel">
+                            <option value="GAS">Xăng</option>
+                            <option value="DIESEL">Dầu Diesel</option>
+                            <option value="ELECTRIC">Điện</option>
+                            <option value="HYBRID">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Loại xe</label>
+                        <select id="create-car-type">
+                            <option value="SUV">SUV</option>
+                            <option value="SEDAN">Sedan</option>
+                            <option value="TRUCK">Truck</option>
+                            <option value="COUPE">Coupe</option>
+                            <option value="HATCHBACK">Hatchback</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Số chỗ</label>
+                        <input type="number" id="create-car-seats" placeholder="5">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Giá (VND) <span style="color:#C8102E">*</span></label>
+                        <input type="number" id="create-car-price" placeholder="1000000000">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Tồn kho (Nhập) <span style="color:#C8102E">*</span></label>
+                        <input type="number" id="car-initial-quantity" value="10">
+                    </div>
+                </div>
+            </div>
+            <div class="admin-panel__footer">
+                <button class="btn-admin btn-admin--outline" onclick="closeAdminPanel('car-create-panel')">Hủy</button>
+                <button class="btn-admin btn-admin--primary" onclick="submitCreateCar()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ Table ═══ -->
+    <table class="om-table">
+        <thead>
+            <tr>
+                <th style="width:40px">#</th>
+                <th>Tên xe</th>
+                <th>Mã xe</th>
+                <th>Hình ảnh</th>
+                <th>Nhiên liệu</th>
+                <th>Loại xe</th>
+                <th>Số chỗ</th>
+                <th>Giá</th>
+                <th>Tồn kho</th>
+                <th style="width:100px">Hành động</th>
+            </tr>
+        </thead>
+        <tbody id="car-table"></tbody>
+    </table>
+</div>
+
+<script src="./javascript/carMana.js"></script>

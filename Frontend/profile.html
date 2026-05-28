@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hồ sơ cá nhân - N18 Auto. Xem và cập nhật thông tin tài khoản của bạn.">
+    <title>Hồ Sơ Của Tôi — N18 AUTO</title>
+    <link rel="icon" href="/image/LogoWeb.png">
+
+    <!-- Font & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/stylecss/profile.css">
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="profile-header">
+        <a href="/index.html" class="profile-header__logo">N18 AUTO</a>
+        <nav class="profile-header__nav">
+            <a href="/orders.html" class="profile-header__link profile-header__link--orders">
+                <i class="fas fa-list-alt"></i> Đơn đặt xe
+            </a>
+            <a href="/index.html" class="profile-header__link">
+                <i class="fas fa-home"></i> Trang chủ
+            </a>
+        </nav>
+    </header>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="profile-container" id="profile-content">
+
+        <!-- Avatar + Tên -->
+        <div class="profile-avatar-section">
+            <img id="profile-avatar-img" src="/image/default-avatar.png" alt="Avatar" class="profile-avatar">
+            <div class="profile-avatar-info">
+                <h2 id="profile-display-name">Đang tải...</h2>
+                <p id="profile-display-email"></p>
+                <div class="profile-role-badge" id="profile-role-badge">Thành viên</div>
+            </div>
+        </div>
+
+        <!-- Thông tin hiện tại -->
+        <div class="profile-info-grid">
+            <div class="profile-info-card">
+                <div class="profile-info-card__label">
+                    <i class="fas fa-user"></i> Họ và tên
+                </div>
+                <div class="profile-info-card__value" id="info-name">—</div>
+            </div>
+
+            <div class="profile-info-card">
+                <div class="profile-info-card__label">
+                    <i class="fas fa-envelope"></i> Email
+                </div>
+                <div class="profile-info-card__value" id="info-email">—</div>
+            </div>
+
+            <div class="profile-info-card">
+                <div class="profile-info-card__label">
+                    <i class="fas fa-phone"></i> Số điện thoại
+                </div>
+                <div class="profile-info-card__value" id="info-phone">—</div>
+            </div>
+
+            <div class="profile-info-card">
+                <div class="profile-info-card__label">
+                    <i class="fas fa-calendar-alt"></i> Ngày tham gia
+                </div>
+                <div class="profile-info-card__value" id="info-joined">—</div>
+            </div>
+
+            <div class="profile-info-card profile-info-card--full">
+                <div class="profile-info-card__label">
+                    <i class="fas fa-map-marker-alt"></i> Địa chỉ
+                </div>
+                <div class="profile-info-card__value" id="info-address">—</div>
+            </div>
+        </div>
+
+        <!-- Form chỉnh sửa -->
+        <div class="profile-edit-section">
+            <h3><i class="fas fa-edit"></i> Chỉnh sửa thông tin</h3>
+
+            <form id="profile-edit-form">
+                <div class="profile-form-grid">
+
+                    <div class="profile-form-field">
+                        <label for="edit-name">Họ và tên <span>*</span></label>
+                        <input id="edit-name" type="text" placeholder="Nhập họ và tên" required>
+                    </div>
+
+                    <div class="profile-form-field">
+                        <label for="edit-email">Email</label>
+                        <input id="edit-email" type="email" placeholder="Email" disabled
+                            title="Email không thể thay đổi">
+                    </div>
+
+                    <div class="profile-form-field">
+                        <label for="edit-phone">Số điện thoại <span>*</span></label>
+                        <input id="edit-phone" type="tel" placeholder="0901 234 567"
+                            pattern="[0-9]{9,11}" title="9-11 chữ số" required>
+                    </div>
+
+                    <div class="profile-form-field profile-form-field--full">
+                        <label for="edit-address">Địa chỉ <span>*</span></label>
+                        <input id="edit-address" type="text"
+                            placeholder="Số nhà, đường, quận/huyện, tỉnh/thành" required>
+                    </div>
+
+                </div>
+
+                <div class="profile-form-actions">
+                    <button type="button" class="profile-btn profile-btn--logout" onclick="logoutUser()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                    <button type="submit" id="save-btn" class="profile-btn profile-btn--save">
+                        <i class="fas fa-save"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="/javascript/profile.js"></script>
+</body>
+</html>

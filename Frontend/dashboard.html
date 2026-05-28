@@ -1,0 +1,90 @@
+<!-- ═════════════ DASHBOARD ═════════════ -->
+<!-- Stats Cards -->
+<div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--red">
+            <i class="fa fa-car"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Tổng xe</span>
+            <span class="stat-card__value" id="stat-total-cars">--</span>
+            <span class="stat-card__trend stat-card__trend--neutral">
+                <i class="fa fa-database"></i> Trong hệ thống
+            </span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--blue">
+            <i class="fa fa-shopping-cart"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Đơn hàng</span>
+            <span class="stat-card__value" id="stat-orders">--</span>
+            <span class="stat-card__trend stat-card__trend--neutral">
+                <i class="fa fa-clock"></i> Cần xử lý
+            </span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--green">
+            <i class="fa fa-users"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Khách hàng</span>
+            <span class="stat-card__value" id="stat-customers">--</span>
+            <span class="stat-card__trend stat-card__trend--neutral">
+                <i class="fa fa-user-plus"></i> Tổng KH
+            </span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon" style="background: rgba(245,166,35,0.15); color: #F5A623;">
+            <i class="fa fa-wallet"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Tiền cọc</span>
+            <span class="stat-card__value" id="stat-deposits" style="font-size: 20px;">--</span>
+            <span class="stat-card__trend stat-card__trend--neutral">
+                <i class="fa fa-check-circle"></i> Đã thu
+            </span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-card__icon" style="background: rgba(39,174,96,0.15); color: #27AE60;">
+            <i class="fa fa-money-bill-wave"></i>
+        </div>
+        <div class="stat-card__info">
+            <span class="stat-card__label">Doanh thu</span>
+            <span class="stat-card__value" id="stat-revenue" style="font-size: 20px;">--</span>
+            <span class="stat-card__trend stat-card__trend--neutral">
+                <i class="fa fa-check-double"></i> Đã bán
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row -->
+<div class="charts-row">
+    <div class="chart-panel">
+        <h3 class="chart-panel__title">
+            <i class="fa fa-chart-line"></i> Đặt cọc & Đơn hàng 6 tháng gần nhất
+        </h3>
+        <canvas id="salesChart"></canvas>
+    </div>
+    <div class="chart-panel">
+        <h3 class="chart-panel__title">
+            <i class="fa fa-chart-pie"></i> Phân bổ dòng xe trong hệ thống
+        </h3>
+        <canvas id="topSellingCarsChart"></canvas>
+    </div>
+</div>
+
+<!-- Bar Chart Full Width -->
+<div class="charts-row">
+    <div class="chart-panel chart-panel--wide">
+        <h3 class="chart-panel__title">
+            <i class="fa fa-chart-bar"></i> Top xe được quan tâm nhất
+        </h3>
+        <canvas id="topCarsBarChart"></canvas>
+    </div>
+</div>
