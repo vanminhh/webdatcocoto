@@ -30,7 +30,8 @@
     "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",
     "node-cron": "^4.2.1",
-    "passport": "^0.7.0"
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "kill-port": "^2.0.1",
