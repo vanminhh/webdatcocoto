@@ -12,9 +12,9 @@ passport.deserializeUser((token, done) => {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI
+    clientID: process.env.GOOGLE_CLIENT_ID || "DUMMY_ID",
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || "DUMMY_SECRET",
+    callbackURL: process.env.GOOGLE_REDIRECT_URI || "/auth/google/callback"
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         console.log("Google Profile:", profile); // Debug Google profile
