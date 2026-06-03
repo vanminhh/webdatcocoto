@@ -142,7 +142,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 40px;
     padding: 10px 24px;
-    width: 400px;
+    width: 520px;
     transition: all var(--transition);
 }
 
@@ -164,6 +164,7 @@ body {
 
 .header__search input {
     flex: 1;
+    width: 130%;
     border: none;
     outline: none;
     background: transparent;
@@ -176,6 +177,69 @@ body {
 .header__search input::placeholder {
     color: var(--text-dim);
     font-style: italic;
+}
+
+/* ─── Autocomplete overrides cho Header Search ─── */
+.header__search {
+    position: relative;
+}
+
+.header__search .search-ac-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.header__search .search-ac-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: -24px;
+    right: -24px;
+    border-radius: var(--radius-md);
+    background: rgba(18, 18, 18, 0.97);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    max-height: 340px;
+}
+
+.header__search .search-ac-item {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header__search .search-ac-item:hover,
+.header__search .search-ac-item.ac-active {
+    background: rgba(192, 57, 43, 0.1);
+}
+
+.header__search .search-ac-item__text em {
+    color: var(--accent-light);
+}
+
+.header__search .search-ac-item__sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+.header__search .search-ac-empty {
+    padding: 18px;
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+/* Filter tag trong header */
+.header__search .search-ac-tag {
+    left: 0;
+    background: rgba(192, 57, 43, 0.15);
+    border: 1px solid rgba(192, 57, 43, 0.35);
+    border-radius: 20px;
+    padding: 5px 10px 5px 14px;
+    font-size: 13px;
+    max-width: calc(100% - 40px);
 }
 
 /* Navigation */

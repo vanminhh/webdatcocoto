@@ -122,8 +122,8 @@ function showToast(message, type = 'success') {
     }, 3500);
 }
 
-// ─── Confirm Dialog ───
-function showConfirm(title, message, onConfirm) {
+// ─── Confirm Dialog (Promise-based, tự tạo DOM) ───
+function showConfirm(title, message, onConfirmCallback) {
     // Remove existing
     const existing = document.querySelector('.confirm-overlay');
     if (existing) existing.remove();
@@ -136,7 +136,7 @@ function showConfirm(title, message, onConfirm) {
             <h3 class="confirm-dialog__title">${title}</h3>
             <p class="confirm-dialog__message">${message}</p>
             <div class="confirm-dialog__actions">
-                <button class="btn-admin btn-admin--outline" onclick="this.closest('.confirm-overlay').remove()">
+                <button class="btn-admin btn-admin--outline" id="confirm-no">
                     Hủy
                 </button>
                 <button class="btn-admin btn-admin--primary" id="confirm-yes">
@@ -148,14 +148,37 @@ function showConfirm(title, message, onConfirm) {
 
     document.body.appendChild(overlay);
 
-    document.getElementById('confirm-yes').addEventListener('click', () => {
-        overlay.remove();
-        if (typeof onConfirm === 'function') onConfirm();
-    });
+    // Nếu truyền callback (dùng kiểu cũ) → gọi callback
+    if (typeof onConfirmCallback === 'function') {
+        document.getElementById('confirm-yes').addEventListener('click', () => {
+            overlay.remove();
+            onConfirmCallback();
+        });
+        document.getElementById('confirm-no').addEventListener('click', () => {
+            overlay.remove();
+        });
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.remove();
+        });
+        return;
+    }
 
-    // Close on overlay click
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) overlay.remove();
+    // Nếu không truyền callback → trả về Promise (dùng cho await)
+    return new Promise((resolve) => {
+        document.getElementById('confirm-yes').addEventListener('click', () => {
+            overlay.remove();
+            resolve(true);
+        });
+        document.getElementById('confirm-no').addEventListener('click', () => {
+            overlay.remove();
+            resolve(false);
+        });
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.remove();
+                resolve(false);
+            }
+        });
     });
 }
 
@@ -180,9 +203,10 @@ window.safeConfirm = function(title, message, onConfirm) {
 
 // ─── API Helper ───
 async function adminFetch(url, options = {}) {
-    const defaultHeaders = {
-        'Content-Type': 'application/json'
-    };
+    const defaultHeaders = {};
+    if (!options.isFormData) {
+        defaultHeaders['Content-Type'] = 'application/json';
+    }
     
     const token = localStorage.getItem('accessToken') || localStorage.getItem('token');
     if (token) {

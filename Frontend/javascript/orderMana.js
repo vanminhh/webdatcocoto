@@ -323,30 +323,9 @@ function clearSelection() {
 }
 
 // ═══════════════════════════════════════
-// CUSTOM CONFIRM MODAL (thay confirm() native)
+// CUSTOM CONFIRM MODAL — sử dụng showConfirm() từ manager.js
+// (Hàm showConfirm đã được hợp nhất trong manager.js, hỗ trợ cả callback và Promise)
 // ═══════════════════════════════════════
-function showConfirm(title, message) {
-    return new Promise((resolve) => {
-        const overlay = document.getElementById('confirmModal');
-        const titleEl = document.getElementById('confirm-title');
-        const msgEl = document.getElementById('confirm-message');
-        const okBtn = document.getElementById('confirm-ok-btn');
-        const cancelBtn = document.getElementById('confirm-cancel-btn');
-
-        titleEl.innerHTML = title;
-        msgEl.innerHTML = message;
-        overlay.classList.add('active');
-
-        const cleanup = () => {
-            overlay.classList.remove('active');
-            okBtn.onclick = null;
-            cancelBtn.onclick = null;
-        };
-
-        okBtn.onclick = () => { cleanup(); resolve(true); };
-        cancelBtn.onclick = () => { cleanup(); resolve(false); };
-    });
-}
 
 // ═══════════════════════════════════════
 // STATUS CHANGE HANDLER

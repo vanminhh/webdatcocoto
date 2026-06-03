@@ -2,7 +2,7 @@
    ORDERS.JS — Trang lịch sử đặt xe
    ════════════════════════════════════════ */
 
-const API_BASE = 'http://localhost:4000';
+// API_BASE được cung cấp từ config.js (window.API_BASE)
 let allOrders = [];
 let currentFilter = 'all';
 

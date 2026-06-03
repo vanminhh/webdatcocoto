@@ -166,21 +166,25 @@ async function saveCustomer(index) {
 
 // Hàm xóa khách hàng
 async function deleteCustomer(index) {
-    if (confirm('Bạn có chắc chắn muốn xóa khách hàng này?')) {
-        try {
-            const customerId = customers[index]._id;
-            const response = await adminFetch(`/customer/${customerId}`, {
-                method: "DELETE"
-            });
+    const customer = customers[index];
+    const ok = await showConfirm(
+        'Xóa <span>khách hàng</span>',
+        `Bạn có chắc chắn muốn xóa khách hàng <span class="om-confirm__highlight">"${customer?.name || ''}"</span>?`
+    );
+    if (!ok) return;
+    try {
+        const customerId = customer._id;
+        const response = await adminFetch(`/customer/${customerId}`, {
+            method: "DELETE"
+        });
 
-            if (!response.ok) throw new Error("Xoá thất bại");
+        if (!response.ok) throw new Error("Xoá thất bại");
 
-            safeToast("Xoá thành công!", 'success');
-            customers.splice(index, 1);
-            updateTable();
-        } catch (error) {
-            safeToast("Đã xảy ra lỗi khi xoá khách hàng.", 'error');
-        }
+        safeToast("Xoá thành công!", 'success');
+        customers.splice(index, 1);
+        updateTable();
+    } catch (error) {
+        safeToast("Đã xảy ra lỗi khi xoá khách hàng.", 'error');
     }
 }
 
@@ -189,65 +193,39 @@ async function deleteCustomer(index) {
 // ═══════════════════════════════════════
 async function deleteAllCustomers() {
     const count = customers.length;
+    if (!count) {
+        safeToast('Không có khách hàng nào để xóa.', 'info');
+        return;
+    }
 
-    // Hàm thực thi gọi API
-    const _doDeleteAll = async () => {
-        try {
-            const response = await adminFetch('/customer/delete-all', {
-                method: 'DELETE'
-            });
-            const data = await response.json();
+    // Confirm lần 1
+    const ok1 = await showConfirm(
+        'Xóa tất cả Khách hàng?',
+        `Bạn sắp xóa toàn bộ <strong>${count}</strong> khách hàng. Tiếp tục?`
+    );
+    if (!ok1) return;
 
-            if (response.ok) {
-                customers = [];
-                updateTable();
-                // Ưu tiên showToast của manager.js, fallback alert
-                if (typeof showToast === 'function') {
-                    showToast(`Đã xóa ${data.deletedCount} khách hàng.`, 'success');
-                } else {
-                    safeToast(data.message, 'info');
-                }
-            } else {
-                if (typeof showToast === 'function') {
-                    showToast(data.message || 'Xóa thất bại!', 'error');
-                } else {
-                    alert('Xóa thất bại: ' + (data.message || 'Lỗi server'));
-                }
-            }
-        } catch (error) {
-            if (typeof showToast === 'function') {
-                showToast('Lỗi kết nối server!', 'error');
-            } else {
-                safeToast('Đã xảy ra lỗi khi xóa tất cả khách hàng.', 'error');
-            }
-        }
-    };
+    // Confirm lần 2
+    const ok2 = await showConfirm(
+        `⚠️ Xác nhận xóa ${count} khách hàng?`,
+        'Hành động này <strong>KHÔNG THỂ</strong> hoàn tác. Toàn bộ dữ liệu khách hàng sẽ bị xóa vĩnh viễn.'
+    );
+    if (!ok2) return;
 
-    // Confirm lần 2 — đếm số lượng thực tế
-    const _confirmStep2 = () => {
-        if (typeof showConfirm === 'function') {
-            showConfirm(
-                `⚠️ Xác nhận xóa ${count} khách hàng?`,
-                'Hành động này KHÔNG THỂ hoàn tác. Toàn bộ dữ liệu khách hàng sẽ bị xóa vĩnh viễn.',
-                _doDeleteAll
-            );
+    try {
+        const response = await adminFetch('/customer/delete-all', {
+            method: 'DELETE'
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+            customers = [];
+            updateTable();
+            safeToast(`Đã xóa ${data.deletedCount} khách hàng.`, 'success');
         } else {
-            if (confirm(`Xác nhận xóa ${count} khách hàng? Hành động không thể hoàn tác!`)) {
-                _doDeleteAll();
-            }
+            safeToast(data.message || 'Xóa thất bại!', 'error');
         }
-    };
-
-    // Confirm lần 1 — cảnh báo ban đầu
-    if (typeof showConfirm === 'function') {
-        showConfirm(
-            'Xóa tất cả Khách hàng?',
-            `Bạn sắp xóa toàn bộ ${count} khách hàng. Tiếp tục?`,
-            _confirmStep2
-        );
-    } else {
-        if (confirm(`Bạn có chắc muốn xóa tất cả ${count} khách hàng không?`)) {
-            _confirmStep2();
-        }
+    } catch (error) {
+        safeToast('Lỗi kết nối server!', 'error');
     }
 }

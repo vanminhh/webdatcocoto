@@ -239,15 +239,19 @@ async function saveUser(index) {
 }
 
 async function deleteUser(index) {
-    if (confirm('Bạn có chắc chắn muốn xóa user này?')) {
-        try {
-            const response = await adminFetch(`/user/${users[index]._id}`, { method: "DELETE" });
-            if (!response.ok) throw new Error("Xóa thất bại");
-            safeToast("Xóa user thành công!", 'success');
-            users.splice(index, 1);
-            updateUserTable();
-        } catch (error) {
-            safeToast("Đã xảy ra lỗi khi xóa user.", 'error');
-        }
+    const user = users[index];
+    const ok = await showConfirm(
+        'Xóa <span>tài khoản</span>',
+        `Bạn có chắc chắn muốn xóa tài khoản <span class="om-confirm__highlight">"${user?.name || user?.username || ''}"</span>?`
+    );
+    if (!ok) return;
+    try {
+        const response = await adminFetch(`/user/${user._id}`, { method: "DELETE" });
+        if (!response.ok) throw new Error("Xóa thất bại");
+        safeToast("Xóa user thành công!", 'success');
+        users.splice(index, 1);
+        updateUserTable();
+    } catch (error) {
+        safeToast("Đã xảy ra lỗi khi xóa user.", 'error');
     }
 }

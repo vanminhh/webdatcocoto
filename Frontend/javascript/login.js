@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             : { username: emailOrUser, password };
 
         try {
-            const response = await fetch("http://localhost:4000/auth/login", {
+            const response = await fetch(`${API_BASE}/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const googleLoginButton = document.getElementById("google-login");
     if (googleLoginButton) {
         googleLoginButton.addEventListener("click", function () {
-            window.location.href = "http://localhost:4000/auth/google";
+            window.location.href = `${API_BASE}/auth/google`;
         });
     }
 
@@ -127,7 +127,7 @@ async function fetchProfile() {
     }
 
     try {
-        let response = await fetch("http://localhost:4000/auth/profile", {
+        let response = await fetch(`${API_BASE}/auth/profile`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -138,7 +138,7 @@ async function fetchProfile() {
         if (response.status === 403) {
             console.log("Token hết hạn, đang làm mới token...");
             const refreshToken = localStorage.getItem("refreshToken");
-            const refreshResponse = await fetch("http://localhost:4000/auth/refresh-token", {
+            const refreshResponse = await fetch(`${API_BASE}/auth/refresh-token`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ token: refreshToken }),
@@ -151,7 +151,7 @@ async function fetchProfile() {
                 console.log("Token mới:", token);
 
                 // Retry fetching the profile with the new token
-                response = await fetch("http://localhost:4000/auth/profile", {
+                response = await fetch(`${API_BASE}/auth/profile`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,

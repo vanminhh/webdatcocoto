@@ -15,7 +15,10 @@ router.put("/update-profile", authMiddleware.authenticateToken, authController.u
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 // Google Callback
-router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/login.html" }), authController.googleCallback);
+router.get("/google/callback", (req, res, next) => {
+    const failureUrl = `${process.env.FRONTEND_URL || ''}/login.html`;
+    passport.authenticate("google", { failureRedirect: failureUrl })(req, res, next);
+}, authController.googleCallback);
 
 router.get("/logout", authController.logout);
 

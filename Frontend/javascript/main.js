@@ -57,7 +57,7 @@ async function updateNavbar() {
         if (profileLink) profileLink.style.display = "flex";
 
         try {
-            const response = await fetch("http://localhost:4000/auth/profile", {
+            const response = await fetch(`${API_BASE}/auth/profile`, {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${token}`,

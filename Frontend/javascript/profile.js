@@ -2,7 +2,7 @@
    PROFILE.JS — Trang hồ sơ cá nhân
    ════════════════════════════════════════ */
 
-const API_BASE = 'http://localhost:4000';
+// API_BASE được cung cấp từ config.js (window.API_BASE)
 
 document.addEventListener('DOMContentLoaded', () => {
     checkAuthAndLoad();

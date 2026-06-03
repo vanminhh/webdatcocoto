@@ -93,6 +93,96 @@
     font-family: inherit; font-size: 13px; outline: none;
 }
 .om-stock-input:focus { border-color: #C8102E; }
+
+/* ── Section Label in car form ── */
+.car-form-section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #C8102E;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 16px 0 12px;
+    padding: 8px 12px;
+    background: rgba(200, 16, 46, 0.06);
+    border-left: 3px solid #C8102E;
+    border-radius: 0 6px 6px 0;
+}
+.car-form-section-label i {
+    font-size: 13px;
+}
+
+/* ── Image Preview ── */
+.img-preview-wrapper {
+    margin-top: 10px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px dashed rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+.img-preview-wrapper.has-image {
+    border-color: rgba(200, 16, 46, 0.5);
+    background: rgba(0,0,0,0.35);
+    border-style: solid;
+    padding: 8px;
+}
+.img-preview-wrapper .preview-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 13px;
+    padding: 24px;
+    text-align: center;
+}
+.img-preview-wrapper .preview-placeholder svg {
+    opacity: 0.5;
+}
+.img-preview-wrapper img {
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    animation: imgFadeIn 0.4s ease;
+}
+@keyframes imgFadeIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+.img-preview-wrapper .preview-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(220,53,69,0.9);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.img-preview-wrapper .preview-remove:hover {
+    background: #DC3545;
+    transform: scale(1.15);
+}
 </style>
 
 <div class="om">
@@ -104,7 +194,7 @@
     <!-- ═══ Toolbar ═══ -->
     <div class="om-toolbar" style="justify-content: space-between;">
         <div style="display: flex; gap: 10px;">
-            <input type="text" id="search-car" class="om-toolbar__input" style="width:240px" placeholder="Tìm kiếm xe...">
+            <input type="text" id="search-car" class="om-toolbar__input" style="width:360px" placeholder="Tìm kiếm xe...">
         </div>
         
         <button class="om-toolbar__btn-add" id="btn-add-car" onclick="openCreateCarPanel()">
@@ -115,9 +205,12 @@
         </button>
     </div>
 
+    <!-- Hidden file input for uploading images -->
+    <input type="file" id="hidden-file-input" style="display: none" accept="image/*">
+
     <!-- ═══ CREATE PANEL ═══ -->
     <div class="admin-panel-overlay" id="car-create-panel">
-        <div class="admin-panel" style="width: 550px;">
+        <div class="admin-panel" style="width: 780px;">
             <div class="admin-panel__header">
                 <h3><i class="fa fa-car"></i> Thêm Xe Mới</h3>
                 <button class="admin-panel__close" onclick="closeAdminPanel('car-create-panel')">
@@ -125,6 +218,8 @@
                 </button>
             </div>
             <div class="admin-panel__body">
+                <!-- Thông tin cơ bản -->
+                <div class="car-form-section-label"><i class="fa fa-info-circle"></i> Thông tin cơ bản</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                     <div class="admin-panel__field">
                         <label>Tên xe <span style="color:#C8102E">*</span></label>
@@ -137,8 +232,20 @@
                 </div>
                 
                 <div class="admin-panel__field">
-                    <label>URL Hình ảnh</label>
-                    <input type="text" id="create-car-url" placeholder="https://...">
+                    <label>
+                        URL Hình ảnh
+                        <span style="font-size: 11px; font-weight: normal; margin-left: 10px; cursor: pointer; color: #4a9eff; padding: 4px 8px; background: rgba(74,158,255,0.1); border-radius: 4px;" onclick="triggerUpload('create-car-url')">
+                            <i class="fa fa-upload"></i> Chọn ảnh từ máy tính
+                        </span>
+                    </label>
+                    <input type="text" id="create-car-url" placeholder="Nhập URL hoặc tải ảnh lên từ máy tính" oninput="updateImagePreview('create-car-url', 'create-car-preview')">
+                    <div class="img-preview-wrapper" id="create-car-preview">
+                        <div class="preview-placeholder">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                            <span>Xem trước ảnh sẽ hiển thị ở đây</span>
+                            <span style="font-size:11px;color:#444;">Nhập URL ảnh hoặc nhấn "Chọn ảnh từ máy tính"</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
@@ -175,6 +282,97 @@
                     <div class="admin-panel__field">
                         <label>Tồn kho (Nhập) <span style="color:#C8102E">*</span></label>
                         <input type="number" id="car-initial-quantity" value="10">
+                    </div>
+                </div>
+
+                <!-- Thông số kỹ thuật -->
+                <div class="car-form-section-label" style="margin-top: 20px;"><i class="fa fa-cogs"></i> Thông số kỹ thuật</div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Loại động cơ</label>
+                        <input type="text" id="create-spec-engine" placeholder="VD: 2.0L Xăng DOHC 16 Van">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Dung tích (cc)</label>
+                        <input type="text" id="create-spec-displacement" placeholder="VD: 1,987 cc">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Công suất tối đa</label>
+                        <input type="text" id="create-spec-horsepower" placeholder="VD: 170 hp / 6600 rpm">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Mô-men xoắn</label>
+                        <input type="text" id="create-spec-torque" placeholder="VD: 205 Nm / 4400 rpm">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Hộp số</label>
+                        <input type="text" id="create-spec-transmission" placeholder="VD: Tự động 6 cấp">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Dẫn động</label>
+                        <select id="create-spec-drivetrain">
+                            <option value="FWD">FWD (Cầu trước)</option>
+                            <option value="RWD">RWD (Cầu sau)</option>
+                            <option value="AWD">AWD (4 bánh)</option>
+                            <option value="4WD">4WD (Gài cầu)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Kích thước -->
+                <div class="car-form-section-label" style="margin-top: 20px;"><i class="fa fa-ruler-combined"></i> Kích thước & Trọng lượng</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Dài x Rộng x Cao (mm)</label>
+                        <input type="text" id="create-spec-dimensions" placeholder="VD: 4,890 x 1,920 x 1,695">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Chiều dài cơ sở (mm)</label>
+                        <input type="text" id="create-spec-wheelbase" placeholder="VD: 2,790">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Khoảng sáng gầm (mm)</label>
+                        <input type="text" id="create-spec-clearance" placeholder="VD: 210">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Trọng lượng (kg)</label>
+                        <input type="text" id="create-spec-weight" placeholder="VD: 1,950">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Bình nhiên liệu (L)</label>
+                        <input type="text" id="create-spec-fueltank" placeholder="VD: 50">
+                    </div>
+                </div>
+
+                <!-- An toàn -->
+                <div class="car-form-section-label" style="margin-top: 20px;"><i class="fa fa-shield-alt"></i> An toàn</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="admin-panel__field">
+                        <label>Số túi khí</label>
+                        <input type="number" id="create-spec-airbags" placeholder="7">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Thông số lốp</label>
+                        <input type="text" id="create-spec-tires" placeholder="VD: 235/50R20">
+                    </div>
+                    <div class="admin-panel__field">
+                        <label>Camera 360</label>
+                        <select id="create-spec-camera360">
+                            <option value="yes">Có</option>
+                            <option value="no">Không</option>
+                        </select>
                     </div>
                 </div>
             </div>

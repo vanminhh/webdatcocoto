@@ -3,7 +3,7 @@ let testdrives = [];
 
 async function fetchTestDrivesFromServer() {
     try {
-        const response = await fetch("http://localhost:4000/order/list/dangky");
+        const response = await fetch(`${API_BASE}/order/list/dangky`);
         if (!response.ok) throw new Error("Không thể lấy danh sách đăng ký lái thử.");
         const data = await response.json();
         testdrives = data;
@@ -111,7 +111,7 @@ async function saveTestDrive(index) {
 
     const td = testdrives[index];
     try {
-        const response = await fetch(`http://localhost:4000/order/${td._id}`, {
+        const response = await fetch(`${API_BASE}/order/${td._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ phoneNumber, carId, date, city, dealer, type: 'dangky' })
@@ -128,15 +128,18 @@ async function saveTestDrive(index) {
 }
 
 async function deleteTestDrive(index) {
-    if (confirm('Bạn có chắc chắn muốn xóa đăng ký lái thử này?')) {
-        try {
-            const response = await fetch(`http://localhost:4000/order/${testdrives[index]._id}`, { method: "DELETE" });
-            if (!response.ok) throw new Error("Xóa thất bại");
-            alert("Xóa thành công!");
-            testdrives.splice(index, 1);
-            updateTestDriveTable();
-        } catch (error) {
-            alert("Đã xảy ra lỗi khi xóa.");
-        }
+    const ok = await showConfirm(
+        'Xóa <span>đăng ký lái thử</span>',
+        'Bạn có chắc chắn muốn xóa đăng ký lái thử này?'
+    );
+    if (!ok) return;
+    try {
+        const response = await fetch(`${API_BASE}/order/${testdrives[index]._id}`, { method: "DELETE" });
+        if (!response.ok) throw new Error("Xóa thất bại");
+        safeToast("Xóa thành công!", 'success');
+        testdrives.splice(index, 1);
+        updateTestDriveTable();
+    } catch (error) {
+        safeToast("Đã xảy ra lỗi khi xóa.", 'error');
     }
 }

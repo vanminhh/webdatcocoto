@@ -153,7 +153,7 @@ const openFormDatLich = document.getElementById('openFormDatLich');
 
 async function checkActiveDepositBeforeOpenForm(carId, token) {
     try {
-        const response = await fetch(`http://localhost:4000/order/check-active-deposit?carId=${carId}`, {
+        const response = await fetch(`${API_BASE}/order/check-active-deposit?carId=${carId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.status === 401 || response.status === 403) {
@@ -249,7 +249,7 @@ function resetFormValidation() {
         // Thử fetch từ API nếu chưa có trong localStorage
         const token = localStorage.getItem('token');
         if (token) {
-            fetch('http://localhost:4000/auth/profile', {
+            fetch(`${API_BASE}/auth/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             }).then(r => r.ok ? r.json() : null).then(data => {
                 if (data && data.phone) {
@@ -420,7 +420,7 @@ submitButton.addEventListener('click', async function () {
 
         console.log('Sending order:', orderData);
 
-        const orderResponse = await fetch('http://localhost:4000/order/create', {
+        const orderResponse = await fetch(`${API_BASE}/order/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -575,4 +575,123 @@ document.getElementById('quantity').addEventListener('input', validateForm);
 document.getElementById('city').addEventListener('change', validateForm);
 document.getElementById('dealer').addEventListener('change', validateForm);
 document.getElementById('date').addEventListener('change', validateForm);
+document.getElementById('date').addEventListener('change', validateForm);
 document.getElementById('termsCheckbox').addEventListener('change', validateForm);
+
+// ─── Thông số kỹ thuật (Dùng specs từ DB, fallback fake) ───
+function generateFakeSpecs(car) {
+    if (!car) return null;
+    
+    const sp = car.specs || {};
+    const isSUV = car.Type === 'SUV';
+    const isElectric = car.Fuel === 'ELECTRIC';
+    const isHybrid = car.Fuel === 'HYBRID';
+    
+    return [
+        {
+            title: 'Động cơ & Vận hành',
+            icon: 'fa-cogs',
+            items: [
+                { label: 'Loại động cơ', value: sp.engine || (isElectric ? 'Mô-tơ điện đồng bộ từ thiên' : (isHybrid ? '2.5L Hybrid (Xăng + Điện)' : '2.0L Xăng DOHC 16 Van')) },
+                { label: 'Dung tích công tác', value: sp.displacement || (isElectric ? 'Không' : (isHybrid ? '2,487 cc' : '1,987 cc')) },
+                { label: 'Công suất tối đa', value: sp.horsepower || (isElectric ? '150 kW (201 hp) / 3400 rpm' : '170 hp / 6600 rpm') },
+                { label: 'Mô-men xoắn', value: sp.torque || (isElectric ? '266 Nm' : '205 Nm / 4400 rpm') },
+                { label: 'Hộp số', value: sp.transmissionDetail || car.transmission || (isHybrid ? 'E-CVT' : 'Tự động 6 cấp') },
+                { label: 'Dẫn động', value: sp.drivetrain ? (sp.drivetrain + (sp.drivetrain === 'AWD' ? ' (4 bánh toàn thời gian)' : sp.drivetrain === 'FWD' ? ' (Cầu trước)' : '')) : (isSUV ? 'AWD (4 bánh toàn thời gian)' : 'FWD (Cầu trước)') }
+            ]
+        },
+        {
+            title: 'Kích thước & Trọng lượng',
+            icon: 'fa-ruler-combined',
+            items: [
+                { label: 'Dài x Rộng x Cao', value: (sp.dimensions ? sp.dimensions + ' mm' : (isSUV ? '4,890 x 1,920 x 1,695 mm' : '4,885 x 1,840 x 1,445 mm')) },
+                { label: 'Chiều dài cơ sở', value: (sp.wheelbase ? sp.wheelbase + ' mm' : (isSUV ? '2,790 mm' : '2,825 mm')) },
+                { label: 'Khoảng sáng gầm xe', value: (sp.clearance ? sp.clearance + ' mm' : (isSUV ? '210 mm' : '140 mm')) },
+                { label: 'Trọng lượng không tải', value: (sp.weight ? sp.weight + ' kg' : (isSUV ? '1,950 kg' : '1,550 kg')) },
+                { label: 'Dung tích bình nhiên liệu', value: sp.fuelTank ? sp.fuelTank + ' L' : (isElectric ? 'Pin 71.4 kWh' : '50 L') }
+            ]
+        },
+        {
+            title: 'Khung gầm',
+            icon: 'fa-car-side',
+            items: [
+                { label: 'Hệ thống treo trước', value: 'MacPherson với thanh cân bằng' },
+                { label: 'Hệ thống treo sau', value: 'Tay đòn kép' },
+                { label: 'Phanh trước / sau', value: 'Đĩa tản nhiệt / Đĩa đặc' },
+                { label: 'Trợ lực lái', value: 'Điện (EPS)' },
+                { label: 'Thông số lốp', value: sp.tires || (isSUV ? '235/50R20' : '235/45R18') }
+            ]
+        },
+        {
+            title: 'An toàn & Công nghệ',
+            icon: 'fa-shield-alt',
+            items: [
+                { label: 'Toyota Safety Sense', value: 'Phiên bản 3.0 mới nhất' },
+                { label: 'Số túi khí', value: sp.airbags ? sp.airbags + ' túi khí' : '7 túi khí' },
+                { label: 'Camera 360', value: sp.camera360 === 'no' ? 'Không' : 'Có, độ nét cao' },
+                { label: 'Cảnh báo điểm mù', value: 'Có (BSM)' },
+                { label: 'Cảnh báo phương tiện cắt ngang', value: 'Có (RCTA)' },
+                { label: 'Cảm biến áp suất lốp', value: 'Có (TPWS)' }
+            ]
+        }
+    ];
+}
+
+function openSpecsPanel() {
+    if (!currentCar) {
+        showBookingToast('Không tìm thấy dữ liệu xe!', 'error');
+        return;
+    }
+
+    const modal = document.getElementById('specsModal');
+    const nameEl = document.getElementById('specsCarName');
+    const bodyEl = document.getElementById('specsBody');
+
+    if (nameEl) nameEl.textContent = `THÔNG SỐ: ${currentCar.name}`;
+    
+    const specsData = generateFakeSpecs(currentCar);
+    let html = '';
+
+    specsData.forEach(section => {
+        html += `
+            <div class="specs-section">
+                <h3><i class="fa ${section.icon}"></i> ${section.title}</h3>
+                <table class="specs-table">
+                    <tbody>
+        `;
+        section.items.forEach(item => {
+            html += `
+                        <tr>
+                            <td>${item.label}</td>
+                            <td>${item.value}</td>
+                        </tr>
+            `;
+        });
+        html += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+    });
+
+    if (bodyEl) bodyEl.innerHTML = html;
+    if (modal) {
+        modal.style.display = 'flex';
+        document.querySelector('.container-main').classList.add('blur-background');
+    }
+}
+
+function closeSpecsPanel() {
+    const modal = document.getElementById('specsModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.querySelector('.container-main').classList.remove('blur-background');
+    }
+}
+
+// Close specs panel when clicking outside
+document.getElementById('specsModal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeSpecsPanel();
+    }
+});

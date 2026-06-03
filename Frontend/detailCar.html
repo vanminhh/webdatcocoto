@@ -64,7 +64,7 @@
                 <p>Bứt phá an toàn Mở ngàn trải nghiệm</p>
                 <div class="links" >
                     <div style="border-right: 1px solid #fff;">
-                        <a href="#" >XEM THÔNG SỐ</a>
+                        <a href="#" onclick="openSpecsPanel(); return false;">XEM THÔNG SỐ</a>
                     </div>
                     <div style="margin-left: 15px">
                         <a href="#" >SO SÁNH XE</a>
@@ -336,6 +336,24 @@
         </div>
     </div>
 
+    <!-- ═══════ PANEL THÔNG SỐ KỸ THUẬT ═══════ -->
+    <div class="specs-modal" id="specsModal" style="display:none;">
+        <div class="specs-modal__content">
+            <button class="specs-modal__close" onclick="closeSpecsPanel()">✕</button>
+            <div class="specs-modal__header">
+                <span class="specs-modal__header-icon">⚙️</span>
+                <div>
+                    <h2 id="specsCarName">THÔNG SỐ KỸ THUẬT</h2>
+                    <p class="specs-modal__subtitle">Chi tiết thông số kỹ thuật xe</p>
+                </div>
+            </div>
+            <div class="specs-modal__body" id="specsBody">
+                <!-- Specs content rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./javascript/config.js"></script>
     <script src="./javascript/detailCar.js"></script>
 </body>
 </html>

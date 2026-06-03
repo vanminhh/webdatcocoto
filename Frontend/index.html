@@ -25,8 +25,10 @@
     <link rel="stylesheet" href="/stylecss/responsive.css">
 
     <!-- Scripts -->
+    <script src="/javascript/config.js"></script>
     <script src="/javascript/promotions.js"></script>
     <script src="/javascript/main.js"></script>
+    <script src="/javascript/searchAutocomplete.js"></script>
     <script src="/javascript/login.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
@@ -247,17 +249,39 @@
     </div>
 
     <script>
-        // ─── Search input handler ───
-        document.getElementById("searchInput").addEventListener("input", function (event) {
-            updateNameFilter(event.target.value);
-        });
-
         // ─── Init khi DOM ready ───
-        document.addEventListener('DOMContentLoaded', function () {
-            FetchAllCars();
+        document.addEventListener('DOMContentLoaded', async function () {
+            await FetchAllCars();
             initHeroBanner();
             initPromoTicker();
             initPromoSection();
+
+            // ─── Khởi tạo Search Autocomplete cho trang chính ───
+            initSearchAutocomplete({
+                inputId: 'searchInput',
+                getItems: () => allCars,
+                getSuggestionText: (car) => car.name,
+                getSuggestionSub: (car) => {
+                    const price = car.Price ? car.Price.toLocaleString('vi-VN') + '₫' : '';
+                    const type = car.Type || '';
+                    return type + (type && price ? ' · ' : '') + price;
+                },
+                matchFn: (car, term) => {
+                    return car.name.toLowerCase().includes(term) ||
+                           (car.Type && car.Type.toLowerCase().includes(term)) ||
+                           (car.Fuel && car.Fuel.toLowerCase().includes(term));
+                },
+                onFilter: (searchTerm, selectedItem) => {
+                    if (selectedItem) {
+                        // Khi chọn 1 xe cụ thể → chuyển đến trang chi tiết
+                        window.location.href = `detailCar.html?id=${selectedItem.id}`;
+                    } else {
+                        // Khi đang gõ → filter danh sách xe
+                        updateNameFilter(searchTerm);
+                    }
+                },
+                placeholder: 'Tìm kiếm dòng xe bạn yêu thích...'
+            });
         });
 
         // ─── Redirect đến trang chi tiết xe ───

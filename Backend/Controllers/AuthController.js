@@ -158,7 +158,8 @@ const googleCallback = (req, res) => {
 
     if (!user || !user.token || !user.refreshToken) {
         console.error("Lỗi: Không thể tạo token cho người dùng Google.");
-        return res.redirect(`/login.html?error=Không thể đăng nhập bằng Google!`);
+        const frontendUrl = process.env.FRONTEND_URL || '';
+        return res.redirect(`${frontendUrl}/login.html?error=Không thể đăng nhập bằng Google!`);
     }
 
     const userInfo = {
@@ -171,7 +172,8 @@ const googleCallback = (req, res) => {
 
     console.log("Thông tin người dùng Google:", userInfo); // Debug user info
     const userInfoString = encodeURIComponent(JSON.stringify(userInfo));
-    res.redirect(`/index.html?userInfo=${userInfoString}`);
+    const frontendUrl = process.env.FRONTEND_URL || '';
+    res.redirect(`${frontendUrl}/index.html?userInfo=${userInfoString}`);
 };
 
 // Refresh Token

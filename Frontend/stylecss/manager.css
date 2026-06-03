@@ -1038,6 +1038,10 @@ body.sidebar-collapsed .admin-main {
     justify-content: center;
 }
 
+.confirm-dialog__title span { color: var(--admin-accent); }
+.confirm-dialog__message span { color: var(--admin-accent-light, #ff4d6d); }
+.om-confirm__highlight { color: #fff; font-weight: 700; }
+
 
 /* ══════════════════════════════════════════════════════════════
    RESPONSIVE

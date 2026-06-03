@@ -14,6 +14,7 @@ const orderRoute = require("./Routes/OrderRoute");
 const paymentRoute = require("./Routes/PaymentRoute");
 const inventoryRoute = require("./Routes/InventoryRoute");
 const dashboardRoute = require("./Routes/DashboardRoute");
+const uploadRoute = require("./Routes/UploadRoute");
 
 const cron = require('node-cron');
 const { expirePendingOrders, expireDepositOrders, cleanupCancelledOrders } = require('./Controllers/OrderController');
@@ -23,9 +24,10 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors({
-    origin: "http://localhost:4000", // Thay đổi nếu frontend chạy ở domain khác
+    origin: process.env.FRONTEND_URL || "http://localhost:4000",
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"] // Cho phép header Authorization
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
 }));
 app.use(express.json());
 
@@ -40,15 +42,21 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, "../Frontend"))); // Serve all static files from the Frontend directory
-app.use(express.static(path.join(__dirname, "../Frontend/javascript")));
-app.use(express.static(path.join(__dirname, "../Frontend/stylecss")));
-app.use(express.static(path.join(__dirname, "../Frontend/image")));
+// Health check endpoint cho Render
+app.get("/health", (req, res) => res.status(200).json({ status: "ok", env: process.env.NODE_ENV }));
 
-// Redirect root to index.html
-app.get("/", (req, res) => {
-    res.redirect("/index.html");
-});
+// Serve static files: chỉ khi chạy local (production Frontend nằm trên Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.use(express.static(path.join(__dirname, "../Frontend")));
+    app.use(express.static(path.join(__dirname, "../Frontend/javascript")));
+    app.use(express.static(path.join(__dirname, "../Frontend/stylecss")));
+    app.use(express.static(path.join(__dirname, "../Frontend/image")));
+    app.get("/", (req, res) => res.redirect("/index.html"));
+} else {
+    // Production: chỉ serve uploaded images (nếu dùng disk fallback)
+    app.use('/image', express.static(path.join(__dirname, "../Frontend/image")));
+    app.get("/", (req, res) => res.json({ message: "WebBanOto API is running", docs: "/health" }));
+}
 app.use("/auth", authRoute);
 app.use("/user", userRoute);
 app.use("/api", carRoute);
@@ -57,12 +65,13 @@ app.use("/order", orderRoute);
 app.use("/payment", paymentRoute);
 app.use("/inventory", inventoryRoute);
 app.use("/dashboard", dashboardRoute);
+app.use("/upload", uploadRoute);
 
 // SePay Webhook — route riêng theo URL đã đăng ký trên SePay dashboard
 const PaymentController = require('./Controllers/PaymentController');
 app.post("/api/sepay-webhook", PaymentController.sePayWebhook);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`*Server is running at: http://localhost:${PORT}`);
 });
 
