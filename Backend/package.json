@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/minhvuogdzz/webbanoto#readme",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
